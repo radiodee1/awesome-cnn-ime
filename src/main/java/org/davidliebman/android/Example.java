@@ -30,6 +30,7 @@ package org.davidliebman.android;
         import org.slf4j.Logger;
         import org.slf4j.LoggerFactory;
 
+        import java.io.*;
         import java.util.*;
 
 /**
@@ -51,13 +52,14 @@ public class Example {
         int seed = 123;
         int listenerFreq = iterations/5;
         int nEpochs = 1;
-        DataSet mnist;
-        SplitTestAndTrain trainTest;
-        DataSet trainInput;
-        List<INDArray> testInput = new ArrayList<INDArray>();
-        List<INDArray> testLabels = new ArrayList<INDArray>();
 
+        boolean saveValues = true;
+        boolean loadValues = true;
+        boolean trainValues = true;
+        boolean evalValues = true;
 
+        Network cnn = new Network();
+        FileManager files = new FileManager(cnn.getModel());
 
         //log.info("Load data....");
         //DataSetIterator mnistIter = new MnistDataSetIterator(batchSize,numSamples, true);
@@ -65,94 +67,40 @@ public class Example {
         DataSetIterator mnistTrain = new MnistDataSetIterator(batchSize,true,12345);
         DataSetIterator mnistTest = new MnistDataSetIterator(batchSize,false,12345);
 
-        log.info("Build model....");
-        MultiLayerConfiguration.Builder builder = new NeuralNetConfiguration.Builder()
-                .seed(seed)
-                .iterations(iterations)
-                .gradientNormalization(GradientNormalization.RenormalizeL2PerLayer)
-                .optimizationAlgo(OptimizationAlgorithm.STOCHASTIC_GRADIENT_DESCENT)
-                .list(6)
-                .layer(0, new ConvolutionLayer.Builder(5, 5)
-                        .stride(1,1)
-                        .nIn(nChannels)
-                        .nOut(20)
-                        .dropOut(0.5)
-                        .weightInit(WeightInit.XAVIER)
-                        .activation("relu")
-                        .build())
-                .layer(1, new SubsamplingLayer.Builder(SubsamplingLayer.PoolingType.MAX, new int[] {2,2})
-                        .stride(2,2)
-                        .build())
-                .layer(2, new ConvolutionLayer.Builder(5,5)
-                        .stride(1,1)
-                        .nIn(20) // nChannels
-                        .nOut(6) // 6
-                        .weightInit(WeightInit.XAVIER)
-                        .activation("relu")
-                        .build())
-                .layer(3, new SubsamplingLayer.Builder(SubsamplingLayer.PoolingType.MAX, new int[] {2,2})
-                        .stride(2,2)
-                        .build())
-                .layer(4, new DenseLayer.Builder().activation("relu")
-                        .nOut(500).build())
-                .layer(5, new OutputLayer.Builder(LossFunctions.LossFunction.NEGATIVELOGLIKELIHOOD)
-                        .nOut(outputNum)
-                        .weightInit(WeightInit.XAVIER)
-                        .activation("softmax")
-                        .build())
-                .backprop(true).pretrain(false);
 
-        new ConvolutionLayerSetup(builder,numRows,numColumns,nChannels);
+        MultiLayerNetwork model = cnn.getModel();
 
-        MultiLayerConfiguration conf = builder.build();
 
-        MultiLayerNetwork model = new MultiLayerNetwork(conf);
-        model.init();
-
-        /*
-        log.info("Train model....");
-        model.setListeners(Arrays.asList((IterationListener) new ScoreIterationListener(listenerFreq)));
-        while(mnistIter.hasNext()) {
-            mnist = mnistIter.next();
-            trainTest = mnist.splitTestAndTrain(splitTrainNum, new Random(seed)); // train set that is the result
-            trainInput = trainTest.getTrain(); // get feature matrix and labels for training
-            testInput.add(trainTest.getTest().getFeatureMatrix());
-            testLabels.add(trainTest.getTest().getLabels());
-            model.fit(trainInput);
+        if (loadValues) {
+            files.loadModel();
         }
-
-        log.info("Evaluate weights....");
-
-        log.info("Evaluate model....");
-        Evaluation eval = new Evaluation(outputNum);
-        for(int i = 0; i < testInput.size(); i++) {
-            INDArray output = model.output(testInput.get(i));
-            eval.eval(testLabels.get(i), output);
-        }
-        INDArray output = model.output(testInput.get(0));
-        eval.eval(testLabels.get(0), output);
-        log.info(eval.stats());
-        log.info("****************Example finished********************");
-        */
 
         log.info("Train model....");
         model.setListeners(new ScoreIterationListener(1));
         for( int i=0; i<nEpochs; i++ ) {
-            model.fit(mnistTrain);
-            log.info("*** Completed epoch {} ***", i);
 
-            log.info("Evaluate model....");
-            Evaluation eval = new Evaluation(outputNum);
-            while(mnistTest.hasNext()){
-                DataSet ds = mnistTest.next();
-                INDArray output = model.output(ds.getFeatureMatrix());
-                eval.eval(ds.getLabels(), output);
+            if (trainValues) model.fit(mnistTrain);
+
+            log.info("*** Completed epoch {} ***", i);
+            if (evalValues) {
+                log.info("Evaluate model....");
+                Evaluation eval = new Evaluation(outputNum);
+                while (mnistTest.hasNext()) {
+                    DataSet ds = mnistTest.next();
+                    INDArray output = model.output(ds.getFeatureMatrix());
+                    eval.eval(ds.getLabels(), output);
+                }
+                log.info(eval.stats());
+                mnistTest.reset();
             }
-            log.info(eval.stats());
-            mnistTest.reset();
         }
         log.info("****************Example finished********************");
-        // 41 mins, 0.7613 accuracy
+        // 38 mins, 0.9446 Accuracy
+
+        if(saveValues && trainValues) {
+            files.saveModel();
+            log.info("values saved....");
+        }
     }
 }
 
