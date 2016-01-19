@@ -64,8 +64,11 @@ public class Example {
         //log.info("Load data....");
         //DataSetIterator mnistIter = new MnistDataSetIterator(batchSize,numSamples, true);
         log.info("Load data....");
-        DataSetIterator mnistTrain = new MnistDataSetIterator(batchSize,true,12345);
-        DataSetIterator mnistTest = new MnistDataSetIterator(batchSize,false,12345);
+        DataSetSplit mnist = new DataSetSplit();
+
+        DataSetIterator dataTrain = mnist.getSetTrain();//new MnistDataSetIterator(batchSize,true,12345);
+        DataSetIterator dataTest = mnist.getSetTest();//new MnistDataSetIterator(batchSize,false,12345);
+
 
 
         MultiLayerNetwork model = cnn.getModel();
@@ -79,19 +82,19 @@ public class Example {
         model.setListeners(new ScoreIterationListener(1));
         for( int i=0; i<nEpochs; i++ ) {
 
-            if (trainValues) model.fit(mnistTrain);
+            if (trainValues) model.fit(dataTrain);
 
             log.info("*** Completed epoch {} ***", i);
             if (evalValues) {
                 log.info("Evaluate model....");
                 Evaluation eval = new Evaluation(outputNum);
-                while (mnistTest.hasNext()) {
-                    DataSet ds = mnistTest.next();
+                while (dataTest.hasNext()) {
+                    DataSet ds = dataTest.next();
                     INDArray output = model.output(ds.getFeatureMatrix());
                     eval.eval(ds.getLabels(), output);
                 }
                 log.info(eval.stats());
-                mnistTest.reset();
+                dataTest.reset();
             }
         }
         log.info("****************Example finished********************");
