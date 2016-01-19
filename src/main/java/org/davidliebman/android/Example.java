@@ -59,7 +59,7 @@ public class Example {
         boolean evalValues = true;
 
         Network cnn = new Network();
-        FileManager files = new FileManager(cnn.getModel());
+        FileManager files = new FileManager();
 
         //log.info("Load data....");
         //DataSetIterator mnistIter = new MnistDataSetIterator(batchSize,numSamples, true);
@@ -72,7 +72,7 @@ public class Example {
 
 
         if (loadValues) {
-            files.loadModel();
+            files.loadModel(model);
         }
 
         log.info("Train model....");
@@ -98,7 +98,7 @@ public class Example {
         // 38 mins, 0.9446 Accuracy
 
         if(saveValues && trainValues) {
-            files.saveModel();
+            files.saveModel(model);
             log.info("values saved....");
         }
     }

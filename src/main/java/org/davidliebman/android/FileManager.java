@@ -15,8 +15,8 @@ public class FileManager {
     String fileName = "/home/dave/workspace/lenet_example_digits.bin";
 
 
-    FileManager (MultiLayerNetwork m ) {
-        model = m;
+    FileManager (  ) {
+        //model = m;
     }
 
     public MultiLayerNetwork getModel() {return model;}
@@ -28,7 +28,8 @@ public class FileManager {
 
     public void setLongFileName(String name) {fileName = name;}
 
-    public void loadModel() throws Exception{
+    public void loadModel(MultiLayerNetwork m ) throws Exception{
+        model = m;
         File filePath = new File(fileName);
         DataInputStream dis = new DataInputStream(new FileInputStream(filePath));
         INDArray newParams = Nd4j.read(dis);
@@ -36,7 +37,8 @@ public class FileManager {
         model.setParameters(newParams);
     }
 
-    public void saveModel() throws Exception {
+    public void saveModel(MultiLayerNetwork m) throws Exception {
+        model = m;
         //Write the network parameters:
         File filePointer = new File(fileName);
         //OutputStream fos = Files.newOutputStream(Paths.get(fileName));

@@ -70,7 +70,7 @@ public class Network {
         new ConvolutionLayerSetup(builder,28,28,1);
 
         MultiLayerConfiguration conf = builder.build();
-        MultiLayerNetwork model = new MultiLayerNetwork(conf);
+        model = new MultiLayerNetwork(conf);
         model.init();
     }
 
