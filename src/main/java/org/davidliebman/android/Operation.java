@@ -20,8 +20,13 @@ public class Operation {
     int batchSize;
     int epochs;
     int iterations;
-    boolean singleEval = false;
 
+    int evalType = 0;
+
+    public static final int EVAL_SINGLE_NUMERIC = 1;
+    public static final int EVAL_SINGLE_ALPHA = 2;
+    public static final int EVAL_TRAIN_NUMERIC = 3;
+    public static final int EVAL_TRAIN_ALPHA = 4;
 
     private static final Logger log = LoggerFactory.getLogger(Operation.class);
 
@@ -33,18 +38,35 @@ public class Operation {
         this.batchSize = batchSize;
         this.epochs = epochs;
         this.iterations = iterations;
-        this.singleEval = false;
-        startOperation();
+
     }
 
     public Operation(Network model) throws Exception {
         this.network = model;
         this.model = model.getModel();
-        this.singleEval = true;
-        startOperation();
+
+
     }
 
+    public void setEvalType(int type) {evalType = type;}
+
     public void startOperation() throws Exception {
+
+        switch (evalType) {
+            case EVAL_SINGLE_ALPHA:
+                break;
+            case EVAL_SINGLE_NUMERIC:
+                break;
+            case EVAL_TRAIN_ALPHA:
+                break;
+            case EVAL_TRAIN_NUMERIC:
+                startOperationMnistTrain();
+                break;
+        }
+
+    }
+
+    public void startOperationMnistTrain() throws Exception {
 
         boolean saveValues = false;
         boolean loadValues = true;
@@ -52,10 +74,10 @@ public class Operation {
         boolean evalValues = true;
 
         log.info("Load data....");
-        DataSetSplit mnist = new DataSetSplit();
+        //DataSetSplit mnist = new DataSetSplit();
 
-        train = mnist.getSetTrain();
-        test = mnist.getSetTest();
+        train = data.getSetTrain();
+        test = data.getSetTest();
 
         FileManager files = new FileManager();
 

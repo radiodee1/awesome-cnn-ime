@@ -41,69 +41,22 @@ public class Example {
     private static final Logger log = LoggerFactory.getLogger(Example.class);
 
     public static void main(String[] args) throws Exception {
-        int numRows = 28;
-        int numColumns = 28;
-        int nChannels = 1;
-        int outputNum = 10;
-        int numSamples = 2000;
+
         int batchSize = 64;
         int iterations = 1; //10
-        int splitTrainNum = (int) (batchSize*.8);
-        int seed = 123;
-        int listenerFreq = iterations/5;
-        int nEpochs = 1;
 
-        boolean saveValues = true;
-        boolean loadValues = true;
-        boolean trainValues = true;
-        boolean evalValues = true;
+        int nEpochs = 1;
 
         Network cnn = new Network();
         //FileManager files = new FileManager();
 
         DataSetSplit mnist = new DataSetSplit();
 
-        Operation OpTest = new Operation(cnn,mnist,batchSize, nEpochs,iterations);
-        //MultiLayerNetwork model = cnn.getModel();
-
-        /*
-        log.info("Load data....");
-
-        DataSetIterator dataTrain = mnist.getSetTrain();
-        DataSetIterator dataTest = mnist.getSetTest();
+        Operation opTest = new Operation(cnn,mnist,batchSize, nEpochs,iterations);
+        opTest.setEvalType(Operation.EVAL_TRAIN_NUMERIC);
+        opTest.startOperation();
 
 
-        if (loadValues) {
-            files.loadModel(model);
-        }
-
-        log.info("Train model....");
-        model.setListeners(new ScoreIterationListener(1));
-        for( int i=0; i<nEpochs; i++ ) {
-
-            if (trainValues) model.fit(dataTrain);
-
-            log.info("*** Completed epoch {} ***", i);
-            if (evalValues) {
-                log.info("Evaluate model....");
-                Evaluation eval = new Evaluation(outputNum);
-                while (dataTest.hasNext()) {
-                    DataSet ds = dataTest.next();
-                    INDArray output = model.output(ds.getFeatureMatrix());
-                    eval.eval(ds.getLabels(), output);
-                }
-                log.info(eval.stats());
-                dataTest.reset();
-            }
-        }
-        log.info("****************Example finished********************");
-        // 38 mins, 0.9446 Accuracy
-
-        if(saveValues && trainValues) {
-            files.saveModel(model);
-            log.info("values saved....");
-        }
-        */
     }
 }
 
