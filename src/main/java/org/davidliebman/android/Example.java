@@ -59,19 +59,18 @@ public class Example {
         boolean evalValues = true;
 
         Network cnn = new Network();
-        FileManager files = new FileManager();
+        //FileManager files = new FileManager();
 
-        //log.info("Load data....");
-        //DataSetIterator mnistIter = new MnistDataSetIterator(batchSize,numSamples, true);
-        log.info("Load data....");
         DataSetSplit mnist = new DataSetSplit();
 
-        DataSetIterator dataTrain = mnist.getSetTrain();//new MnistDataSetIterator(batchSize,true,12345);
-        DataSetIterator dataTest = mnist.getSetTest();//new MnistDataSetIterator(batchSize,false,12345);
+        Operation OpTest = new Operation(cnn,mnist,batchSize, nEpochs,iterations);
+        //MultiLayerNetwork model = cnn.getModel();
 
+        /*
+        log.info("Load data....");
 
-
-        MultiLayerNetwork model = cnn.getModel();
+        DataSetIterator dataTrain = mnist.getSetTrain();
+        DataSetIterator dataTest = mnist.getSetTest();
 
 
         if (loadValues) {
@@ -104,6 +103,7 @@ public class Example {
             files.saveModel(model);
             log.info("values saved....");
         }
+        */
     }
 }
 
