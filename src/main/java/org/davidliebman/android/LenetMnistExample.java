@@ -123,7 +123,7 @@ public class LenetMnistExample {
         log.info("****************Example finished********************");
         // 38 mins, 0.9446 Accuracy
 
-        if(saveValues) {
+        if(saveValues && trainValues) {
             //Write the network parameters:
             File filePointer = new File(fileName);
             //OutputStream fos = Files.newOutputStream(Paths.get(fileName));
