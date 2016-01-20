@@ -27,6 +27,7 @@ public class Operation {
     public static final int EVAL_SINGLE_ALPHA = 2;
     public static final int EVAL_TRAIN_NUMERIC = 3;
     public static final int EVAL_TRAIN_ALPHA = 4;
+    public static final int EVAL_TRAIN_NUMERIC_SHOW = 5;
 
     private static final Logger log = LoggerFactory.getLogger(Operation.class);
 
@@ -62,8 +63,62 @@ public class Operation {
             case EVAL_TRAIN_NUMERIC:
                 startOperationMnistTrain();
                 break;
+            case EVAL_TRAIN_NUMERIC_SHOW:
+                startOperationMnistShow();
+                break;
         }
 
+    }
+
+    public void startOperationMnistShow() throws Exception {
+        boolean saveValues = false;
+        boolean loadValues = true;
+        boolean trainValues = false;
+        boolean evalValues = true;
+
+        log.info("Load data....");
+        //DataSetSplit mnist = new DataSetSplit();
+
+        train = data.getSetTrain();
+        test = data.getSetTest();
+
+        FileManager files = new FileManager();
+
+        if (loadValues) {
+            files.loadModel(model);
+        }
+
+        log.info("Train model....");
+        model.setListeners(new ScoreIterationListener(1));
+        for( int i=0; i<epochs; i++ ) {
+
+            if (trainValues) model.fit(train);
+
+            log.info("*** Completed epoch {} ***", i);
+            if (evalValues) {
+                log.info("Evaluate model....");
+                Evaluation eval = new Evaluation(network.getOutputNum());
+                while (test.hasNext()) {
+                    DataSet ds = test.next();
+                    System.out.println("output " + ds.get(0).getFeatureMatrix().length());
+                    showSquare(ds.get(0).getFeatureMatrix());
+                    INDArray output = model.output(ds.getFeatureMatrix());
+
+                    //System.out.println("output " + output.toString());
+
+                    eval.eval(ds.getLabels(), output);
+                }
+                log.info(eval.stats());
+                test.reset();
+            }
+        }
+        log.info("****************Example finished********************");
+        // 38 mins, 0.9446 Accuracy
+
+        if(saveValues && trainValues) {
+            files.saveModel(model);
+            log.info("values saved....");
+        }
     }
 
     public void startOperationMnistTrain() throws Exception {
@@ -111,5 +166,20 @@ public class Operation {
             files.saveModel(model);
             log.info("values saved....");
         }
+    }
+
+    public void showSquare(INDArray num) {
+        System.out.println("---------");
+        INDArray num2 = num.linearView();
+        for (int k = 0; k < 28*28; k ++ ) {
+            if ( num2.getDouble(k) > 0.5d ) {
+                System.out.print("*");
+            }
+            else {
+                System.out.print(" ");
+            }
+            if (k % 28 == 0) System.out.println();
+        }
+        System.out.println();
     }
 }
