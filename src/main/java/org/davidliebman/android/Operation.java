@@ -100,8 +100,12 @@ public class Operation {
                 Evaluation eval = new Evaluation(network.getOutputNum());
                 while (test.hasNext()) {
                     DataSet ds = test.next();
-                    System.out.println("output " + ds.get(0).getFeatureMatrix().length());
-                    showSquare(ds.get(0).getFeatureMatrix());
+                    for (int ii = 0; ii < ds.getFeatureMatrix().length()/ (28*28) ; ii ++) {
+                        //System.out.println("output " + ds.get(ii).getLabels());
+
+                        showSquare(ds.get(ii).getFeatureMatrix());
+                        showNumForSquare(ds.get(ii).getLabels());
+                    }
                     INDArray output = model.output(ds.getFeatureMatrix());
 
                     //System.out.println("output " + output.toString());
@@ -181,5 +185,13 @@ public class Operation {
             if (k % 28 == 0) System.out.println();
         }
         System.out.println();
+    }
+
+    public void showNumForSquare(INDArray num) {
+        for (int i = 0; i < 10; i ++) {
+            if (num.getDouble(i) > 0) {
+                System.out.println("Num " + i);
+            }
+        }
     }
 }
