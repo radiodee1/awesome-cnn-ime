@@ -100,16 +100,19 @@ public class Operation {
                 Evaluation eval = new Evaluation(network.getOutputNum());
                 while (test.hasNext()) {
                     DataSet ds = test.next();
+
                     for (int ii = 0; ii < ds.getFeatureMatrix().length()/ (28*28) ; ii ++) {
                         //System.out.println("output " + ds.get(ii).getLabels());
 
                         showSquare(ds.get(ii).getFeatureMatrix());
                         showNumForSquare(ds.get(ii).getLabels());
+                        //System.out.println(output.getRow(ii));
                     }
-                    INDArray output = model.output(ds.getFeatureMatrix());
 
                     //System.out.println("output " + output.toString());
+                    INDArray output = model.output(ds.getFeatureMatrix());
 
+                    System.out.println(output.length());
                     eval.eval(ds.getLabels(), output);
                 }
                 log.info(eval.stats());
