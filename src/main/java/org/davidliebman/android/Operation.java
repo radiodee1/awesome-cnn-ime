@@ -76,6 +76,10 @@ public class Operation {
         boolean trainValues = false;
         boolean evalValues = true;
 
+        float evalsTotal = 0, evalsCorrect = 0;
+
+        int nextNum = 0;
+
         log.info("Load data....");
         //DataSetSplit mnist = new DataSetSplit();
 
@@ -101,22 +105,27 @@ public class Operation {
                 while (test.hasNext()) {
                     DataSet ds = test.next();
 
-                    for (int ii = 0; ii < ds.getFeatureMatrix().length()/ (28*28) ; ii ++) {
-                        //System.out.println("output " + ds.get(ii).getLabels());
+                    for(int jj = 0; jj < ds.getFeatureMatrix().length() / (28*28); jj ++) {
+                        System.out.println(" jj " + jj + " next " + nextNum + " percent " + (evalsCorrect/evalsTotal));
+                        showSquare(ds.get(jj).getFeatureMatrix());
+                        int label = showNumForSquare(ds.get(jj).getLabels());
 
-                        showSquare(ds.get(ii).getFeatureMatrix());
-                        showNumForSquare(ds.get(ii).getLabels());
-                        //System.out.println(output.getRow(ii));
+                        INDArray output = model.output(ds.get(jj).getFeatureMatrix());
+                        eval.eval(ds.get(jj).getLabels(), output);
+
+                        //System.out.println(output.length() + " -- " + output.toString());
+                        int prediction = showNumForSquare(output);
+
+                        evalsTotal ++;
+                        if (label == prediction) evalsCorrect ++;
                     }
 
-                    //System.out.println("output " + output.toString());
-                    INDArray output = model.output(ds.getFeatureMatrix());
 
-                    System.out.println(output.length());
-                    eval.eval(ds.getLabels(), output);
+                    nextNum ++;
                 }
                 log.info(eval.stats());
                 test.reset();
+                System.out.println("Percent : " + (evalsCorrect/evalsTotal));
             }
         }
         log.info("****************Example finished********************");
@@ -190,11 +199,17 @@ public class Operation {
         System.out.println();
     }
 
-    public void showNumForSquare(INDArray num) {
+    public int showNumForSquare(INDArray num) {
+        int found = 0;
+        double foundVal = 0.0;
         for (int i = 0; i < 10; i ++) {
-            if (num.getDouble(i) > 0) {
-                System.out.println("Num " + i);
+            if (num.getDouble(i) > foundVal ) {
+                found = i;
+                foundVal = num.getDouble(i);
+
             }
         }
+        System.out.println("Num " + found);
+        return found;
     }
 }
