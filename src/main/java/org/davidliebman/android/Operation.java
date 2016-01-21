@@ -112,19 +112,22 @@ public class Operation {
                     for(int jj = 0; jj < ds.getFeatureMatrix().length() / (28*28); jj ++) {
                         System.out.println(" jj " + jj + " next " + nextNum + " percent " + (evalsCorrect/evalsTotal));
                         showSquare(ds.get(jj).getFeatureMatrix());
-                        int label = showNumForSquare(ds.get(jj).getLabels());
+                        //int label = showNumForSquare(ds.get(jj).getLabels());
+
+                        String hotLabel = oneHot.getMatchingOut(ds.get(jj).getLabels());
+                        System.out.println("label "+ hotLabel);
 
                         INDArray output = model.output(ds.get(jj).getFeatureMatrix());
                         eval.eval(ds.get(jj).getLabels(), output);
 
                         //System.out.println(output.length() + " -- " + output.toString());
-                        int prediction = showNumForSquare(output);
+                        //int prediction = showNumForSquare(output);
 
                         String hotOut = oneHot.getMatchingOut(output);
                         System.out.println("output " + hotOut);
 
                         evalsTotal ++;
-                        if (label == prediction) evalsCorrect ++;
+                        if (hotLabel.equals(hotOut) ) evalsCorrect ++;
                     }
 
 
@@ -204,8 +207,10 @@ public class Operation {
             if (k % 28 == 0) System.out.println();
         }
         System.out.println();
+        System.out.println("----------");
     }
 
+    /*
     public int showNumForSquare(INDArray num) {
         int found = 0;
         double foundVal = 0.0;
@@ -219,4 +224,5 @@ public class Operation {
         System.out.println("Num " + found);
         return found;
     }
+    */
 }
