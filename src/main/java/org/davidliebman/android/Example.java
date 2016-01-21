@@ -53,7 +53,7 @@ public class Example {
         DataSetSplit mnist = new DataSetSplit();
 
         Operation opTest = new Operation(cnn,mnist,batchSize, nEpochs,iterations);
-        opTest.setEvalType(Operation.EVAL_TRAIN_NUMERIC_SHOW);
+        opTest.setEvalType(Operation.EVAL_SINGLE_ALPHA_UPPER);
         opTest.startOperation();
 
 

@@ -1,13 +1,21 @@
 package org.davidliebman.android;
 
+import org.deeplearning4j.datasets.vectorizer.ImageVectorizer;
 import org.deeplearning4j.eval.Evaluation;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
+import org.deeplearning4j.util.ImageLoader;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.dataset.DataSet;
 import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
+import org.nd4j.linalg.factory.Nd4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
 /**
  * Created by dave on 1/19/16.
@@ -58,6 +66,7 @@ public class Operation {
 
         switch (evalType) {
             case EVAL_SINGLE_ALPHA_UPPER:
+                startOperationAlphaShow();
                 break;
             case EVAL_SINGLE_ALPHA_LOWER:
                 break;
@@ -201,7 +210,26 @@ public class Operation {
         }
     }
 
-    public void showSquare(INDArray num) {
+    public void startOperationAlphaShow() throws Exception {
+
+
+        OneHotOutput oneHot = new OneHotOutput(OneHotOutput.TYPE_ALPHA_UPPER);
+        File alphaIO = new File("/home/dave/workspace/sd_19_temp.bmp");
+        String letter = "S";
+        INDArray arr = loadImageBMP(alphaIO);
+        //ImageLoader loader = new ImageLoader(28,28);
+        //ImageVectorizer loaderV = new ImageVectorizer(alphaIO,oneHot.length(),oneHot.getMemberNumber(letter) );
+        //loaderV.normalize();
+        //loaderV.binarize(20);
+        //DataSet vector = loaderV.vectorize();
+
+
+        INDArray out = convert28x28(arr);
+        Operation.showSquare(out);
+    }
+
+
+    public static void showSquare(INDArray num) {
         System.out.println("---------");
         INDArray num2 = num.linearView();
         for (int k = 0; k < 28*28; k ++ ) {
@@ -217,19 +245,45 @@ public class Operation {
         System.out.println("----------");
     }
 
-    /*
-    public int showNumForSquare(INDArray num) {
-        int found = 0;
-        double foundVal = 0.0;
-        for (int i = 0; i < 10; i ++) {
-            if (num.getDouble(i) > foundVal ) {
-                found = i;
-                foundVal = num.getDouble(i);
+    public static INDArray convert28x28 (INDArray in) {
+        double magx = 28/128.0d;
+        double magy = 28/128.0d;
+        int transx = 0, transy = 0;
+        double outArray[][] = new double[28][28];
 
+        for (int i  = 0; i < Math.sqrt(in.length()); i ++) {
+            for (int j = 0; j < Math.sqrt(in.length()); j ++) {
+                if (in.getRow(i).getDouble(j) > 0.5d) {
+                    if (i*magx >=0 && i*magx + transx< 28 && j * magy >=0 && j * magy+ transy < 28) {
+                        outArray[(int)(j*magy)+transy][(int)(i*magx) + transx] = 1.0d;
+                    }
+                }
             }
         }
-        System.out.println("Num " + found);
-        return found;
+        INDArray out = Nd4j.create(outArray);
+        //out.transpose();
+        System.out.println(out.toString());
+        return out;
     }
-    */
+
+    public  INDArray loadImageBMP ( File file) throws Exception {
+        System.out.println(file.toString());
+        BufferedImage image = ImageIO.read(file);
+
+        double[][] array2D = new double[image.getWidth()][image.getHeight()];
+
+        for (int xPixel = 0; xPixel < image.getWidth(); xPixel++)
+        {
+            for (int yPixel = 0; yPixel < image.getHeight(); yPixel++)
+            {
+                int color = image.getRGB(xPixel, yPixel);
+                if (color== Color.BLACK.getRGB()) {
+                    array2D[xPixel][yPixel] = 1;
+                } else {
+                    array2D[xPixel][yPixel] = 0; // ?
+                }
+            }
+        }
+        return Nd4j.create(array2D);
+    }
 }

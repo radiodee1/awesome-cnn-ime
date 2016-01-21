@@ -95,4 +95,24 @@ public class OneHotOutput {
 
         return out;
     }
+
+    public int length() {
+        return stringList.length();
+    }
+
+    public int getMemberNumber(String in) {
+        int out = -1;
+        double largest = 0;
+
+        if (stringList.length() > 0 ) {
+
+            for (int i = 0; i < stringList.length(); i ++) {
+                if (in.equals(stringList.substring(i,i+1))) {
+
+                    out = i;
+                }
+            }
+        }
+        return out;
+    }
 }
