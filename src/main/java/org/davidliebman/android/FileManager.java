@@ -12,10 +12,12 @@ import java.io.*;
 public class FileManager {
     MultiLayerNetwork model;
 
-    String fileName = "/home/dave/workspace/lenet_example_digits.bin";
+    String fileName = "";
+    String name = "lenet_example_digits";
+    String homeDir = System.getProperty("user.home") + File.separator +"workspace" + File.separator;
 
-
-    FileManager (  ) {
+    FileManager (  String name  ) {
+        setFileName(name);
         //model = m;
     }
 
@@ -23,7 +25,9 @@ public class FileManager {
     public void setModel(MultiLayerNetwork m) {model = m;}
 
     public void setFileName(String name) {
-        fileName = "/home/dave/workspace/"+ name +".bin";
+        this.name = name;
+
+        fileName = homeDir + name +".bin";
     }
 
     public void setLongFileName(String name) {fileName = name;}

@@ -24,10 +24,13 @@ public class Operation {
     int evalType = 0;
 
     public static final int EVAL_SINGLE_NUMERIC = 1;
-    public static final int EVAL_SINGLE_ALPHA = 2;
-    public static final int EVAL_TRAIN_NUMERIC = 3;
-    public static final int EVAL_TRAIN_ALPHA = 4;
-    public static final int EVAL_TRAIN_NUMERIC_SHOW = 5;
+    public static final int EVAL_SINGLE_ALPHA_UPPER = 2;
+    public static final int EVAL_SINGLE_ALPHA_LOWER = 3;
+    public static final int EVAL_TRAIN_NUMERIC = 4;
+    public static final int EVAL_TRAIN_ALPHA_UPPER = 5;
+    public static final int EVAL_TRAIN_ALPHA_LOWER = 6;
+    public static final int EVAL_TRAIN_NUMERIC_SHOW = 7;
+
 
     private static final Logger log = LoggerFactory.getLogger(Operation.class);
 
@@ -54,11 +57,15 @@ public class Operation {
     public void startOperation() throws Exception {
 
         switch (evalType) {
-            case EVAL_SINGLE_ALPHA:
+            case EVAL_SINGLE_ALPHA_UPPER:
+                break;
+            case EVAL_SINGLE_ALPHA_LOWER:
                 break;
             case EVAL_SINGLE_NUMERIC:
                 break;
-            case EVAL_TRAIN_ALPHA:
+            case EVAL_TRAIN_ALPHA_UPPER:
+                break;
+            case EVAL_TRAIN_ALPHA_LOWER:
                 break;
             case EVAL_TRAIN_NUMERIC:
                 startOperationMnistTrain();
@@ -86,7 +93,7 @@ public class Operation {
         train = data.getSetTrain();
         test = data.getSetTest();
 
-        FileManager files = new FileManager();
+        FileManager files = new FileManager("lenet_example_digits");
 
         OneHotOutput oneHot = new OneHotOutput(OneHotOutput.TYPE_NUMERALS);
 
@@ -160,7 +167,7 @@ public class Operation {
         train = data.getSetTrain();
         test = data.getSetTest();
 
-        FileManager files = new FileManager();
+        FileManager files = new FileManager("lenet_example_digits");
 
         if (loadValues) {
             files.loadModel(model);
