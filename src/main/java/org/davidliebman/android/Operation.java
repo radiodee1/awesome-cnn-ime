@@ -88,6 +88,10 @@ public class Operation {
 
         FileManager files = new FileManager();
 
+        OneHotOutput oneHot = new OneHotOutput(OneHotOutput.TYPE_NUMERALS);
+
+        System.out.println(oneHot.toString());
+
         if (loadValues) {
             files.loadModel(model);
         }
@@ -115,6 +119,9 @@ public class Operation {
 
                         //System.out.println(output.length() + " -- " + output.toString());
                         int prediction = showNumForSquare(output);
+
+                        String hotOut = oneHot.getMatchingOut(output);
+                        System.out.println("output " + hotOut);
 
                         evalsTotal ++;
                         if (label == prediction) evalsCorrect ++;
