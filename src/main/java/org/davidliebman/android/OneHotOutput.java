@@ -1,6 +1,7 @@
 package org.davidliebman.android;
 
 import org.nd4j.linalg.api.ndarray.INDArray;
+import org.nd4j.linalg.factory.Nd4j;
 
 import java.util.ArrayList;
 
@@ -113,7 +114,7 @@ public class OneHotOutput {
             in = String.valueOf((char) num);
 
             offset = start;
-            System.out.println(offset + " in "+in + "  "+String.valueOf(num) + " " + stringList.length());
+            //System.out.println(offset + " in "+in + "  "+String.valueOf(num) + " " + stringList.length());
         }
         // input is a visual representation of the character
         if (stringList.length() > 0) {
@@ -123,11 +124,29 @@ public class OneHotOutput {
 
                     out = i + offset;
 
-                    System.out.println("out " + out);
+                    //System.out.println("out " + out);
                 }
             }
         }
 
         return out ;
+    }
+
+    public INDArray getLabelOutput(String in) {
+        INDArray out = Nd4j.create(new double[stringList.length()][1]);
+
+        // MUST BE IMAGE OF DESIRED CHARACTER, IE ASCII LENGTH 1
+        int num = getMemberNumber(in.substring(0,1));
+
+        for (int i = 0; i < stringList.length(); i ++) {
+            if (i == num) {
+                out.putScalar(i, 1.0d);
+            }
+            else {
+                out.putScalar(i, 0.0d);
+            }
+        }
+        //System.out.println(out.toString());
+        return out;
     }
 }

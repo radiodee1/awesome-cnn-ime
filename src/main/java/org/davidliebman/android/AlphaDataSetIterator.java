@@ -31,51 +31,20 @@ public class AlphaDataSetIterator extends BaseDatasetIterator implements Iterato
         OneHotOutput oneHot = new OneHotOutput(OneHotOutput.TYPE_ALPHA_UPPER);
         File alphaIO = new File("/home/dave/workspace/sd_19_temp.bmp");
         String letter = "S";
+        /*
         INDArray arr = loadImageBMP(alphaIO);
-        //ImageLoader loader = new ImageLoader(28,28);
-        //ImageVectorizer loaderV = new ImageVectorizer(alphaIO,oneHot.length(),oneHot.getMemberNumber(letter) );
-        //loaderV.normalize();
-        //loaderV.binarize(20);
-        //DataSet vector = loaderV.vectorize();
 
 
         INDArray out = convert28x28(arr);
         Operation.showSquare(out);
 
         makeFileList();
+        */
     }
 
+    /*
 
-    public void makeFileList() throws Exception{
-        String homeDir = System.getProperty("user.home") +
-                File.separator +"workspace" + File.separator + "sd_nineteen" + File.separator;
 
-        String pattern = "HSF*/F*/HSF*.bmp";
-        pattern = homeDir + pattern;
-        final PathMatcher matcher =
-                FileSystems.getDefault().getPathMatcher("glob:" + pattern);
-
-        System.out.println(pattern +"----");
-
-        //final PathMatcher matcher2 = FileSystems.getDefault().getPathMatcher("glob:d:/**/*.zip");
-        Files.walkFileTree(Paths.get(homeDir), new SimpleFileVisitor<Path>() {
-            @Override
-            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                if (matcher.matches(file)) {
-                    //System.out.println(file);
-                    list.add(file.toString());
-                }
-                return FileVisitResult.CONTINUE;
-            }
-
-            @Override
-            public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
-                return FileVisitResult.CONTINUE;
-            }
-        });
-
-        System.out.println(list.size());
-    }
 
 
     public static INDArray convert28x28 (INDArray in) {
@@ -119,6 +88,6 @@ public class AlphaDataSetIterator extends BaseDatasetIterator implements Iterato
         }
         return Nd4j.create(array2D);
     }
-
+    */
 
 }

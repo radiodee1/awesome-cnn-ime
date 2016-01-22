@@ -226,9 +226,9 @@ public class Operation {
                 System.out.print("*");
             }
             else {
-                System.out.print(" ");
+                System.out.print(".");
             }
-            if (k % 28 == 0) System.out.println();
+            if ((k+1) % 28 == 0) System.out.println();
         }
         System.out.println();
         System.out.println("----------");

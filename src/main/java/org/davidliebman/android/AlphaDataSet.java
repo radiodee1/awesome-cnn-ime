@@ -27,6 +27,9 @@ public class AlphaDataSet extends DataSet {
     int searchType = 0;
     long seed = 0;
 
+    double [][] featureMatrix;
+    double [][] labels;
+
     public AlphaDataSet(int type, long mSeed)  throws Exception{
         super();
 
@@ -50,6 +53,8 @@ public class AlphaDataSet extends DataSet {
         makeFileList();
 
         randomizeList() ;
+
+        fillArrays();
     }
 
     public void makeFileList() throws Exception{
@@ -83,17 +88,21 @@ public class AlphaDataSet extends DataSet {
         System.out.println(list.size());
     }
 
+    public static INDArray convert28x28(INDArray in) {
+        return convert28x28(in, 2.0d);
+    }
 
-    public static INDArray convert28x28 (INDArray in) {
-        double magx = 28/128.0d;
-        double magy = 28/128.0d;
-        int transx = 0, transy = 0;
+
+    public static INDArray convert28x28 (INDArray in , double modifier) {
+        double magx = modifier * 28/128.0d;
+        double magy = modifier * 28/128.0d;
+        int transx = -(int)(28/modifier), transy = -(int)(28/ modifier);
         double outArray[][] = new double[28][28];
 
         for (int i  = 0; i < Math.sqrt(in.length()); i ++) {
             for (int j = 0; j < Math.sqrt(in.length()); j ++) {
                 if (in.getRow(i).getDouble(j) > 0.5d) {
-                    if (i*magx >=0 && i*magx + transx< 28 && j * magy >=0 && j * magy+ transy < 28) {
+                    if (i*magx + transx >=0 && i*magx + transx< 28 && j * magy+transy >=0 && j * magy+ transy < 28) {
                         outArray[(int)(j*magy)+transy][(int)(i*magx) + transx] = 1.0d;
                     }
                 }
@@ -154,16 +163,60 @@ public class AlphaDataSet extends DataSet {
 
         list = newList;
 
-        for(int i = 0; i < list.size(); i ++) {
-            System.out.println(list.get(i));
 
-        }
 
+        //output.getLabelOutput("c");
         //System.out.println(String.valueOf((char)output.getMemberNumber("63")));
         //System.out.println(list.get(list.size() - 1));
     }
 
 
+    public void fillArrays() throws Exception{
+        OneHotOutput output = new OneHotOutput(searchType);
+
+        featureMatrix = new double[28*28][list.size()];
+        labels = new double[output.length()][list.size()];
+
+        for(int i = 0; i < 64; i ++) {
+            //System.out.println(list.get(i));
+            INDArray arr = loadImageBMP(new File(list.get(i)));
+            arr.linearView();
+            INDArray out = convert28x28(arr);
+
+            Operation.showSquare(out);
+
+            for (int j = 0; j < (28*28); j ++) {
+                featureMatrix[j][i] = out.getDouble(j);
+
+            }
+            int character = getCharFromFilename(list.get(i));
+            INDArray label = output.getLabelOutput(String.valueOf((char)character));
+
+            for(int j = 0; j < (output.length()); j ++) {
+                labels [j][i] = label.getDouble(j);
+            }
+        }
+
+        /*
+        for (int i = 0; i < 28*28; i ++ ) {
+            System.out.print(featureMatrix[i][0] + ", ");
+
+        }
+        System.out.println(list.get(0));
+        for(int i = 0; i < output.length(); i ++) {
+            System.out.print(labels[i][0] + ", ");
+        }
+        System.out.println("\n"+list.get(0));
+        */
+    }
+
+    public int getCharFromFilename(String in) {
+        int startConst = 6, stopConst = 4;
+
+        String num = in.substring(in.length() - startConst, in.length()-stopConst);
+        int out = Integer.parseInt(num,16);
+        return out;
+    }
 
     @Override
     public String toString() {
