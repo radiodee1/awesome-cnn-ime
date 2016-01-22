@@ -1,12 +1,8 @@
 package org.davidliebman.android;
 
-import org.deeplearning4j.datasets.fetchers.BaseDataFetcher;
-import org.deeplearning4j.datasets.iterator.BaseDatasetIterator;
-import org.deeplearning4j.datasets.iterator.DataSetIterator;
-import org.deeplearning4j.datasets.vectorizer.ImageVectorizer;
-import org.deeplearning4j.util.ImageLoader;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.dataset.DataSet;
+import org.nd4j.linalg.dataset.SplitTestAndTrain;
 import org.nd4j.linalg.factory.Nd4j;
 
 import javax.imageio.ImageIO;
@@ -17,17 +13,24 @@ import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Random;
 
 /**
  * Created by dave on 1/21/16.
  */
-public class AlphaDataSetIterator extends BaseDatasetIterator implements Iterator<DataSet>,DataSetIterator {
+public class AlphaDataSet extends DataSet {
+
+
 
     ArrayList<String> list = new ArrayList<String>();
 
-    public AlphaDataSetIterator(int batch, int numExamples, BaseDataFetcher fetcher) throws Exception {
-        super(batch, numExamples, fetcher);
+    int searchType = 0;
+
+    public AlphaDataSet(int type)  throws Exception{
+        super();
+
+        searchType = type;
+
         OneHotOutput oneHot = new OneHotOutput(OneHotOutput.TYPE_ALPHA_UPPER);
         File alphaIO = new File("/home/dave/workspace/sd_19_temp.bmp");
         String letter = "S";
@@ -43,8 +46,9 @@ public class AlphaDataSetIterator extends BaseDatasetIterator implements Iterato
         Operation.showSquare(out);
 
         makeFileList();
-    }
 
+        randomizeList() ;
+    }
 
     public void makeFileList() throws Exception{
         String homeDir = System.getProperty("user.home") +
@@ -118,6 +122,49 @@ public class AlphaDataSetIterator extends BaseDatasetIterator implements Iterato
             }
         }
         return Nd4j.create(array2D);
+    }
+
+    public void randomizeList() {
+        ArrayList<String> newList = new ArrayList<String>();
+
+        OneHotOutput output = new OneHotOutput(searchType);
+        int startConst = 6, stopConst = 4;
+
+        for (int i = 0; i < list.size(); i ++) {
+            String num = list.get(i).substring(list.get(i).length() - startConst, list.get(i).length()-stopConst);
+            System.out.println(num);
+
+        }
+
+        System.out.println(output.getMemberNumber("37"));
+        System.out.println(list.get(list.size() - 1));
+    }
+
+
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+
+    @Override
+    public INDArray getFeatureMatrix() {
+        return super.getFeatureMatrix();
+    }
+
+    @Override
+    public INDArray getLabels() {
+        return super.getLabels();
+    }
+
+    @Override
+    public SplitTestAndTrain splitTestAndTrain(int numHoldout, Random rng) {
+        return super.splitTestAndTrain(numHoldout, rng);
+    }
+
+    @Override
+    public SplitTestAndTrain splitTestAndTrain(int numHoldout) {
+        return super.splitTestAndTrain(numHoldout);
     }
 
 

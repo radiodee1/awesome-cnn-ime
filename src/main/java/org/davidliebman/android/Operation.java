@@ -213,19 +213,8 @@ public class Operation {
     public void startOperationAlphaShow() throws Exception {
 
 
-        OneHotOutput oneHot = new OneHotOutput(OneHotOutput.TYPE_ALPHA_UPPER);
-        File alphaIO = new File("/home/dave/workspace/sd_19_temp.bmp");
-        String letter = "S";
-        INDArray arr = loadImageBMP(alphaIO);
-        //ImageLoader loader = new ImageLoader(28,28);
-        //ImageVectorizer loaderV = new ImageVectorizer(alphaIO,oneHot.length(),oneHot.getMemberNumber(letter) );
-        //loaderV.normalize();
-        //loaderV.binarize(20);
-        //DataSet vector = loaderV.vectorize();
-
-
-        INDArray out = convert28x28(arr);
-        Operation.showSquare(out);
+        //AlphaDataSetIterator alpha = new AlphaDataSetIterator(64, 1, null);
+        AlphaDataSet alpha = new AlphaDataSet(OneHotOutput.TYPE_ALPHA_LOWER);
     }
 
 
@@ -245,45 +234,5 @@ public class Operation {
         System.out.println("----------");
     }
 
-    public static INDArray convert28x28 (INDArray in) {
-        double magx = 28/128.0d;
-        double magy = 28/128.0d;
-        int transx = 0, transy = 0;
-        double outArray[][] = new double[28][28];
 
-        for (int i  = 0; i < Math.sqrt(in.length()); i ++) {
-            for (int j = 0; j < Math.sqrt(in.length()); j ++) {
-                if (in.getRow(i).getDouble(j) > 0.5d) {
-                    if (i*magx >=0 && i*magx + transx< 28 && j * magy >=0 && j * magy+ transy < 28) {
-                        outArray[(int)(j*magy)+transy][(int)(i*magx) + transx] = 1.0d;
-                    }
-                }
-            }
-        }
-        INDArray out = Nd4j.create(outArray);
-        //out.transpose();
-        System.out.println(out.toString());
-        return out;
-    }
-
-    public  INDArray loadImageBMP ( File file) throws Exception {
-        System.out.println(file.toString());
-        BufferedImage image = ImageIO.read(file);
-
-        double[][] array2D = new double[image.getWidth()][image.getHeight()];
-
-        for (int xPixel = 0; xPixel < image.getWidth(); xPixel++)
-        {
-            for (int yPixel = 0; yPixel < image.getHeight(); yPixel++)
-            {
-                int color = image.getRGB(xPixel, yPixel);
-                if (color== Color.BLACK.getRGB()) {
-                    array2D[xPixel][yPixel] = 1;
-                } else {
-                    array2D[xPixel][yPixel] = 0; // ?
-                }
-            }
-        }
-        return Nd4j.create(array2D);
-    }
 }

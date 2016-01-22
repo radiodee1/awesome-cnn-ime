@@ -103,16 +103,21 @@ public class OneHotOutput {
     public int getMemberNumber(String in) {
         int out = -1;
         double largest = 0;
+        if (in.length() > 1) {
+            int num = Integer.parseInt(in,16);
+            in = String.valueOf((char) num);
+        }
+        // input is a visual representation of the character
+        if (stringList.length() > 0) {
 
-        if (stringList.length() > 0 ) {
-
-            for (int i = 0; i < stringList.length(); i ++) {
-                if (in.equals(stringList.substring(i,i+1))) {
+            for (int i = 0; i < stringList.length(); i++) {
+                if (in.equals(stringList.substring(i, i + 1))) {
 
                     out = i;
                 }
             }
         }
+
         return out;
     }
 }
