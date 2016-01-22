@@ -3,6 +3,8 @@ package org.davidliebman.android;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.dataset.DataSet;
 import org.nd4j.linalg.dataset.SplitTestAndTrain;
+import org.nd4j.linalg.dataset.api.DataSetPreProcessor;
+import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
 import org.nd4j.linalg.factory.Nd4j;
 
 import javax.imageio.ImageIO;
@@ -12,13 +14,13 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
+import java.util.List;
 
 /**
  * Created by dave on 1/21/16.
  */
-public class AlphaDataSet extends DataSet {
+public class AlphaDataSet  implements DataSetIterator {
 
 
 
@@ -223,25 +225,58 @@ public class AlphaDataSet extends DataSet {
         return super.toString();
     }
 
-    @Override
-    public INDArray getFeatureMatrix() {
-        return super.getFeatureMatrix();
+
+
+    public DataSet next(int i) {
+        return null;
     }
 
-    @Override
-    public INDArray getLabels() {
-        return super.getLabels();
+    public int totalExamples() {
+        return 0;
     }
 
-    @Override
-    public SplitTestAndTrain splitTestAndTrain(int numHoldout, Random rng) {
-        return super.splitTestAndTrain(numHoldout, rng);
+    public int inputColumns() {
+        return 0;
     }
 
-    @Override
-    public SplitTestAndTrain splitTestAndTrain(int numHoldout) {
-        return super.splitTestAndTrain(numHoldout);
+    public int totalOutcomes() {
+        return 0;
+    }
+
+    public void reset() {
+
+    }
+
+    public int batch() {
+        return 0;
+    }
+
+    public int cursor() {
+        return 0;
+    }
+
+    public int numExamples() {
+        return 0;
+    }
+
+    public void setPreProcessor(DataSetPreProcessor dataSetPreProcessor) {
+
+    }
+
+    public List<String> getLabels() {
+        return null;
     }
 
 
+    public boolean hasNext() {
+        return false;
+    }
+
+    public DataSet next() {
+        return null;
+    }
+
+    public void remove() {
+
+    }
 }

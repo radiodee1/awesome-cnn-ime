@@ -231,7 +231,7 @@ public class Operation {
             if ((k+1) % 28 == 0) System.out.println();
         }
         System.out.println();
-        System.out.println("----------");
+        System.out.println("---------");
     }
 
 
