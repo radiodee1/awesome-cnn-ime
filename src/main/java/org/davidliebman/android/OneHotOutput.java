@@ -11,6 +11,7 @@ public class OneHotOutput {
 
     String stringList = "";
 
+    int start = 0, stop = 0 ;
     public static final int TYPE_NUMERALS = 0;
     public static final int TYPE_ALPHA_UPPER = 1;
     public static final int TYPE_ALPHA_LOWER = 2;
@@ -32,6 +33,8 @@ public class OneHotOutput {
     }
 
     public String makeList(int start, int stop) {
+        this.start = start;
+        this.stop = stop;
         String stringList = "";
         for (int i = start; i <= stop; i ++) {
             stringList = stringList + String.valueOf( (char)i);
@@ -102,10 +105,15 @@ public class OneHotOutput {
 
     public int getMemberNumber(String in) {
         int out = -1;
+        int offset = 0;
         double largest = 0;
-        if (in.length() > 1) {
+        // input is hex for character
+        if (in.length() >= 2) {
             int num = Integer.parseInt(in,16);
             in = String.valueOf((char) num);
+
+            offset = start;
+            System.out.println(offset + " in "+in + "  "+String.valueOf(num) + " " + stringList.length());
         }
         // input is a visual representation of the character
         if (stringList.length() > 0) {
@@ -113,11 +121,13 @@ public class OneHotOutput {
             for (int i = 0; i < stringList.length(); i++) {
                 if (in.equals(stringList.substring(i, i + 1))) {
 
-                    out = i;
+                    out = i + offset;
+
+                    System.out.println("out " + out);
                 }
             }
         }
 
-        return out;
+        return out ;
     }
 }

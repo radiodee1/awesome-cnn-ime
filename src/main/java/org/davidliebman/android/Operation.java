@@ -214,7 +214,7 @@ public class Operation {
 
 
         //AlphaDataSetIterator alpha = new AlphaDataSetIterator(64, 1, null);
-        AlphaDataSet alpha = new AlphaDataSet(OneHotOutput.TYPE_ALPHA_LOWER);
+        AlphaDataSet alpha = new AlphaDataSet(OneHotOutput.TYPE_ALPHA_LOWER, 999);
     }
 
 

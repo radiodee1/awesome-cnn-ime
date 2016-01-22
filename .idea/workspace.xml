@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5a857b92-d38f-49c2-a6b0-632537c89443" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/org/davidliebman/android/AlphaDataSet.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/davidliebman/android/AlphaDataSetIterator.java" afterPath="$PROJECT_DIR$/src/main/java/org/davidliebman/android/AlphaDataSetIterator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/davidliebman/android/AlphaDataSet.java" afterPath="$PROJECT_DIR$/src/main/java/org/davidliebman/android/AlphaDataSet.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/davidliebman/android/OneHotOutput.java" afterPath="$PROJECT_DIR$/src/main/java/org/davidliebman/android/OneHotOutput.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/davidliebman/android/Operation.java" afterPath="$PROJECT_DIR$/src/main/java/org/davidliebman/android/Operation.java" />
     </list>
@@ -44,18 +43,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="55" column="60" selection-start-line="55" selection-start-column="60" selection-end-line="55" selection-end-column="60" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Operation.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Operation.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/davidliebman/android/Operation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="216" column="75" selection-start-line="216" selection-start-column="75" selection-end-line="216" selection-end-column="75" />
+            <state vertical-scroll-proportion="0.7069243">
+              <caret line="216" column="80" selection-start-line="216" selection-start-column="80" selection-end-line="216" selection-end-column="80" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -67,15 +64,9 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/org/davidliebman/android/OneHotOutput.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
+              <caret line="125" column="53" selection-start-line="125" selection-start-column="53" selection-end-line="125" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1221#1222#0" expanded="true" />
-                <element signature="e#1269#1270#0" expanded="true" />
-                <element signature="e#1301#1302#0" expanded="true" />
-                <element signature="e#1334#1335#0" expanded="true" />
-                <element signature="e#2588#2589#0" expanded="true" />
-                <element signature="e#2630#2631#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -86,11 +77,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#474#475#0" expanded="true" />
-                <element signature="e#501#502#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -100,31 +87,27 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#910#918#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AlphaDataSet.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AlphaDataSet.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/davidliebman/android/AlphaDataSet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7584541">
-              <caret line="138" column="56" selection-start-line="138" selection-start-column="56" selection-end-line="138" selection-end-column="56" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="157" column="12" selection-start-line="157" selection-start-column="12" selection-end-line="157" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#601#609#0" expanded="true" />
-                <element signature="e#4199#4207#0" expanded="true" />
-                <element signature="e#4694#4695#0" expanded="true" />
-                <element signature="e#4733#4734#0" expanded="true" />
-                <element signature="e#4789#4790#0" expanded="true" />
-                <element signature="e#4836#4837#0" expanded="true" />
-                <element signature="e#4885#4886#0" expanded="true" />
-                <element signature="e#4925#4926#0" expanded="true" />
-                <element signature="e#5160#5161#0" expanded="true" />
-                <element signature="e#5218#5219#0" expanded="true" />
+                <element signature="e#4289#4297#0" expanded="true" />
+                <element signature="e#5375#5376#0" expanded="true" />
+                <element signature="e#5414#5415#0" expanded="true" />
+                <element signature="e#5470#5471#0" expanded="true" />
+                <element signature="e#5517#5518#0" expanded="true" />
+                <element signature="e#5566#5567#0" expanded="true" />
+                <element signature="e#5606#5607#0" expanded="true" />
+                <element signature="e#5841#5842#0" expanded="true" />
+                <element signature="e#5899#5900#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -147,9 +130,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="16" column="13" selection-start-line="16" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -160,6 +141,7 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="65" column="39" selection-start-line="65" selection-start-column="30" selection-end-line="65" selection-end-column="39" />
               <folding>
+                <element signature="imports" expanded="false" />
                 <element signature="e#1069#1070#0" expanded="false" />
                 <element signature="e#1099#1100#0" expanded="false" />
               </folding>
@@ -199,8 +181,8 @@
         <option value="$PROJECT_DIR$/src/main/java/org/davidliebman/android/Example.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/davidliebman/android/AlphaDataSetIterator.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/davidliebman/android/OneHotOutput.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/davidliebman/android/Operation.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/davidliebman/android/AlphaDataSet.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/davidliebman/android/Operation.java" />
       </list>
     </option>
   </component>
@@ -242,7 +224,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -303,8 +287,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="RunManager" selected="Application.Example">
@@ -677,7 +659,13 @@
       <option name="project" value="LOCAL" />
       <updated>1453414643503</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="create temporary image loaders">
+      <created>1453422146322</created>
+      <option name="number" value="00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1453422146322</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -691,7 +679,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38357705" sideWeight="0.122857146" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26771653" sideWeight="0.87714285" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26771653" sideWeight="0.87714285" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295838" sideWeight="0.49714285" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -750,13 +738,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="55" column="60" selection-start-line="55" selection-start-column="60" selection-end-line="55" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/davidliebman/android/Operation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="216" column="75" selection-start-line="216" selection-start-column="75" selection-end-line="216" selection-end-column="75" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/davidliebman/android/Operation.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/davidliebman/android/OneHotOutput.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -770,10 +766,33 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/davidliebman/android/AlphaDataSetIterator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/davidliebman/android/AlphaDataSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="138" column="52" selection-start-line="138" selection-start-column="52" selection-end-line="138" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#474#475#0" expanded="true" />
-            <element signature="e#501#502#0" expanded="true" />
+            <element signature="e#4289#4297#0" expanded="true" />
+            <element signature="e#5375#5376#0" expanded="true" />
+            <element signature="e#5414#5415#0" expanded="true" />
+            <element signature="e#5470#5471#0" expanded="true" />
+            <element signature="e#5517#5518#0" expanded="true" />
+            <element signature="e#5566#5567#0" expanded="true" />
+            <element signature="e#5606#5607#0" expanded="true" />
+            <element signature="e#5841#5842#0" expanded="true" />
+            <element signature="e#5899#5900#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -791,10 +810,8 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/org/davidliebman/android/FileManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -803,6 +820,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="65" column="39" selection-start-line="65" selection-start-column="30" selection-end-line="65" selection-end-column="39" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="e#1069#1070#0" expanded="false" />
             <element signature="e#1099#1100#0" expanded="false" />
           </folding>
@@ -821,9 +839,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="55" column="60" selection-start-line="55" selection-start-column="60" selection-end-line="55" selection-end-column="60" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -841,11 +857,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#474#475#0" expanded="true" />
-            <element signature="e#501#502#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -863,9 +875,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -874,6 +884,71 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="65" column="39" selection-start-line="65" selection-start-column="30" selection-end-line="65" selection-end-column="39" />
           <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1069#1070#0" expanded="false" />
+            <element signature="e#1099#1100#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="19" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/davidliebman/android/Example.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="55" column="60" selection-start-line="55" selection-start-column="60" selection-end-line="55" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/davidliebman/android/Operation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/davidliebman/android/DataSetSplit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/davidliebman/android/LenetMnistExample.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="52" column="34" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/davidliebman/android/FileManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/davidliebman/android/Network.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="65" column="39" selection-start-line="65" selection-start-column="30" selection-end-line="65" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="false" />
             <element signature="e#1069#1070#0" expanded="false" />
             <element signature="e#1099#1100#0" expanded="false" />
           </folding>
@@ -892,9 +967,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="35" column="2" selection-start-line="35" selection-start-column="2" selection-end-line="35" selection-end-column="2" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -913,6 +986,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="e#1069#1070#0" expanded="false" />
             <element signature="e#1099#1100#0" expanded="false" />
           </folding>
@@ -931,9 +1005,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="35" column="2" selection-start-line="35" selection-start-column="2" selection-end-line="35" selection-end-column="2" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -952,6 +1024,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="e#1069#1070#0" expanded="false" />
             <element signature="e#1099#1100#0" expanded="false" />
           </folding>
@@ -970,9 +1043,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1016,6 +1087,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="65" column="39" selection-start-line="65" selection-start-column="30" selection-end-line="65" selection-end-column="39" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="e#1069#1070#0" expanded="false" />
             <element signature="e#1099#1100#0" expanded="false" />
           </folding>
@@ -1026,9 +1098,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="13" selection-start-line="16" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1036,11 +1106,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#474#475#0" expanded="true" />
-            <element signature="e#501#502#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1048,10 +1114,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#910#918#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1059,32 +1122,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="55" column="60" selection-start-line="55" selection-start-column="60" selection-end-line="55" selection-end-column="60" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/davidliebman/android/OneHotOutput.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1221#1222#0" expanded="true" />
-            <element signature="e#1269#1270#0" expanded="true" />
-            <element signature="e#1301#1302#0" expanded="true" />
-            <element signature="e#1334#1335#0" expanded="true" />
-            <element signature="e#2588#2589#0" expanded="true" />
-            <element signature="e#2630#2631#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/davidliebman/android/Operation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="216" column="75" selection-start-line="216" selection-start-column="75" selection-end-line="216" selection-end-column="75" />
+          <caret line="125" column="53" selection-start-line="125" selection-start-column="53" selection-end-line="125" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1093,20 +1138,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/davidliebman/android/AlphaDataSet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7584541">
-          <caret line="138" column="56" selection-start-line="138" selection-start-column="56" selection-end-line="138" selection-end-column="56" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="157" column="12" selection-start-line="157" selection-start-column="12" selection-end-line="157" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#601#609#0" expanded="true" />
-            <element signature="e#4199#4207#0" expanded="true" />
-            <element signature="e#4694#4695#0" expanded="true" />
-            <element signature="e#4733#4734#0" expanded="true" />
-            <element signature="e#4789#4790#0" expanded="true" />
-            <element signature="e#4836#4837#0" expanded="true" />
-            <element signature="e#4885#4886#0" expanded="true" />
-            <element signature="e#4925#4926#0" expanded="true" />
-            <element signature="e#5160#5161#0" expanded="true" />
-            <element signature="e#5218#5219#0" expanded="true" />
+            <element signature="e#4289#4297#0" expanded="true" />
+            <element signature="e#5375#5376#0" expanded="true" />
+            <element signature="e#5414#5415#0" expanded="true" />
+            <element signature="e#5470#5471#0" expanded="true" />
+            <element signature="e#5517#5518#0" expanded="true" />
+            <element signature="e#5566#5567#0" expanded="true" />
+            <element signature="e#5606#5607#0" expanded="true" />
+            <element signature="e#5841#5842#0" expanded="true" />
+            <element signature="e#5899#5900#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/davidliebman/android/Operation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7069243">
+          <caret line="216" column="80" selection-start-line="216" selection-start-column="80" selection-end-line="216" selection-end-column="80" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

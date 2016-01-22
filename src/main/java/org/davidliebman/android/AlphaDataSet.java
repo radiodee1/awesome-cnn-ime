@@ -25,11 +25,13 @@ public class AlphaDataSet extends DataSet {
     ArrayList<String> list = new ArrayList<String>();
 
     int searchType = 0;
+    long seed = 0;
 
-    public AlphaDataSet(int type)  throws Exception{
+    public AlphaDataSet(int type, long mSeed)  throws Exception{
         super();
 
         searchType = type;
+        seed = mSeed;
 
         OneHotOutput oneHot = new OneHotOutput(OneHotOutput.TYPE_ALPHA_UPPER);
         File alphaIO = new File("/home/dave/workspace/sd_19_temp.bmp");
@@ -125,6 +127,7 @@ public class AlphaDataSet extends DataSet {
     }
 
     public void randomizeList() {
+        Random r = new Random(seed);
         ArrayList<String> newList = new ArrayList<String>();
 
         OneHotOutput output = new OneHotOutput(searchType);
@@ -132,12 +135,32 @@ public class AlphaDataSet extends DataSet {
 
         for (int i = 0; i < list.size(); i ++) {
             String num = list.get(i).substring(list.get(i).length() - startConst, list.get(i).length()-stopConst);
-            System.out.println(num);
+            //System.out.println(num);
+            if (output.getMemberNumber(num) != -1) {
+                newList.add(list.get(i));
+            }
+        }
+
+        list = newList;
+        newList = new ArrayList<String>();
+        int size = list.size();
+        for (int i = 0; i < size; i ++) {
+
+            //System.out.println(list.get(i));
+            int choose = r.nextInt(list.size());
+            newList.add(list.get(choose));
+            list.remove(choose);
+        }
+
+        list = newList;
+
+        for(int i = 0; i < list.size(); i ++) {
+            System.out.println(list.get(i));
 
         }
 
-        System.out.println(output.getMemberNumber("37"));
-        System.out.println(list.get(list.size() - 1));
+        //System.out.println(String.valueOf((char)output.getMemberNumber("63")));
+        //System.out.println(list.get(list.size() - 1));
     }
 
 
