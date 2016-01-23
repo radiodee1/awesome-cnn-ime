@@ -26,6 +26,9 @@ public class Operation {
     DataSetSplit data;
     DataSetIterator train, test;
     FileManager files ;
+
+    CharacterEditor editor;
+
     int batchSize;
     int epochs;
     int iterations;
@@ -70,15 +73,16 @@ public class Operation {
 
         switch (evalType) {
             case EVAL_SINGLE_ALPHA_UPPER:
-                startOperationAlphaUpperShow();
                 break;
             case EVAL_SINGLE_ALPHA_LOWER:
                 break;
             case EVAL_SINGLE_NUMERIC:
                 break;
             case EVAL_TRAIN_ALPHA_UPPER:
+                startOperationAlphaUpperShow();
                 break;
             case EVAL_TRAIN_ALPHA_LOWER:
+                startOperationAlphaLowerShow();
                 break;
             case EVAL_TRAIN_NUMERIC:
                 startOperationMnistTrain();
@@ -219,9 +223,9 @@ public class Operation {
 
         //AlphaDataSet alpha = new AlphaDataSet(OneHotOutput.TYPE_ALPHA_UPPER, 999);
 
-        boolean saveValues = false; // false
+        boolean saveValues = true; // false
         boolean loadValues = true; // true
-        boolean trainValues = false; // false
+        boolean trainValues = true; // false
         boolean evalValues = true;
 
         float evalsTotal = 0, evalsCorrect = 0;
@@ -292,7 +296,93 @@ public class Operation {
             }
         }
         log.info("****************Example finished********************");
-        // 38 mins, 0.9446 Accuracy
+        // 38 mins, 0.89 Accuracy
+
+        if(saveValues && trainValues) {
+            files.saveModel(model);
+            log.info("values saved....");
+        }
+    }
+
+    public void startOperationAlphaLowerShow() throws Exception {
+
+
+        //AlphaDataSet alpha = new AlphaDataSet(OneHotOutput.TYPE_ALPHA_UPPER, 999);
+
+        boolean saveValues = true; // false
+        boolean loadValues = true; // true
+        boolean trainValues = true; // false
+        boolean evalValues = true;
+
+        float evalsTotal = 0, evalsCorrect = 0;
+
+        int nextNum = 0;
+
+        log.info("Load data....");
+
+
+        train = data.getSetTrain();
+        test = data.getSetTest();
+
+        files = new FileManager("lenet_example_alpha_lower");
+
+        OneHotOutput oneHot = new OneHotOutput(Operation.EVAL_SINGLE_ALPHA_LOWER);
+
+        System.out.println(oneHot.toString());
+
+        if (loadValues) {
+            files.loadModel(model);
+        }
+
+        log.info("Train model....");
+        model.setListeners(new ScoreIterationListener(1));
+        for( int i=0; i<epochs; i++ ) {
+
+            if (trainValues) model.fit(train);
+
+            log.info("*** Completed epoch {} ***", i);
+            if (evalValues) {
+                log.info("Evaluate model....");
+                Evaluation eval = new Evaluation(network.getOutputNum());
+                while (test.hasNext() ) {
+                    DataSet ds = test.next();
+
+                    for(int jj = 0; jj < ds.getFeatureMatrix().length() / (28*28); jj ++) {
+                        System.out.println("iterations " + jj + " cursor " + nextNum + " percent " + (evalsCorrect/evalsTotal));
+
+                        output_cursor = nextNum;
+                        output_num = jj;
+                        output_score = (evalsCorrect/evalsTotal);
+
+                        showSquare(ds.get(jj).getFeatureMatrix());
+                        //int label = showNumForSquare(ds.get(jj).getLabels());
+
+                        String hotLabel = oneHot.getMatchingOut(ds.get(jj).getLabels());
+                        System.out.println("label "+ hotLabel);
+
+                        INDArray output = model.output(ds.get(jj).getFeatureMatrix());
+                        eval.eval(ds.get(jj).getLabels(), output);
+
+                        //System.out.println(output.length() + " -- " + output.toString());
+                        //int prediction = showNumForSquare(output);
+
+                        String hotOut = oneHot.getMatchingOut(output);
+                        System.out.println("output " + hotOut);
+
+                        evalsTotal ++;
+                        if (hotLabel.equals(hotOut) ) evalsCorrect ++;
+                    }
+
+
+                    nextNum ++;
+                }
+                log.info(eval.stats());
+                test.reset();
+                System.out.println("Percent : " + (evalsCorrect/evalsTotal));
+            }
+        }
+        log.info("****************Example finished********************");
+        // 38 mins, 0.842 Accuracy
 
         if(saveValues && trainValues) {
             files.saveModel(model);
