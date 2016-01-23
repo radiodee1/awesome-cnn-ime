@@ -28,6 +28,8 @@ public class AlphaDataSet  implements DataSetIterator {
 
     int searchType = 0;
     long seed = 0;
+    int cursor = 0;
+    int cursorSize = 0;
 
     double [][] featureMatrix;
     double [][] labels;
@@ -113,11 +115,11 @@ public class AlphaDataSet  implements DataSetIterator {
         INDArray out = Nd4j.create(outArray);
         //out.transpose();
         //System.out.println(out.toString());
-        return out;
+        return out.linearView();
     }
 
     public  INDArray loadImageBMP ( File file) throws Exception {
-        System.out.println(file.toString());
+        //System.out.println(file.toString());
         BufferedImage image = ImageIO.read(file);
 
         double[][] array2D = new double[image.getWidth()][image.getHeight()];
@@ -164,7 +166,7 @@ public class AlphaDataSet  implements DataSetIterator {
         }
 
         list = newList;
-
+        cursorSize = (int)list.size()/64;
 
 
         //output.getLabelOutput("c");
@@ -176,22 +178,22 @@ public class AlphaDataSet  implements DataSetIterator {
     public void fillArrays() throws Exception{
         OneHotOutput output = new OneHotOutput(searchType);
 
-        featureMatrix = new double[28*28][list.size()];
-        labels = new double[output.length()][list.size()];
+        featureMatrix = new double[28*28][64];
+        labels = new double[output.length()][64];
 
         for(int i = 0; i < 64; i ++) {
             //System.out.println(list.get(i));
-            INDArray arr = loadImageBMP(new File(list.get(i)));
+            INDArray arr = loadImageBMP(new File(list.get(i + cursor * 64)));
             arr.linearView();
             INDArray out = convert28x28(arr);
-
-            Operation.showSquare(out);
+            out.linearView();
+            //Operation.showSquare(out);
 
             for (int j = 0; j < (28*28); j ++) {
                 featureMatrix[j][i] = out.getDouble(j);
 
             }
-            int character = getCharFromFilename(list.get(i));
+            int character = getCharFromFilename(list.get(i + cursor * 64));
             INDArray label = output.getLabelOutput(String.valueOf((char)character));
 
             for(int j = 0; j < (output.length()); j ++) {
@@ -232,19 +234,20 @@ public class AlphaDataSet  implements DataSetIterator {
     }
 
     public int totalExamples() {
-        return 0;
+        return list.size();
     }
 
     public int inputColumns() {
-        return 0;
+        return 28*28;
     }
 
     public int totalOutcomes() {
-        return 0;
+        OneHotOutput output = new OneHotOutput(searchType);
+        return output.length();
     }
 
     public void reset() {
-
+        cursor = 0;
     }
 
     public int batch() {
@@ -269,11 +272,25 @@ public class AlphaDataSet  implements DataSetIterator {
 
 
     public boolean hasNext() {
-        return false;
+        boolean hasnext = false;
+        if (cursor < cursorSize) hasnext = true;
+        return hasnext;
     }
 
     public DataSet next() {
-        return null;
+        DataSet temp = new DataSet();
+
+        try {
+            //create dataset with cursor here.
+            fillArrays();
+            temp.setFeatures(Nd4j.create(featureMatrix).transpose());
+            temp.setLabels(Nd4j.create(labels).transpose());
+        }
+        catch (Exception e) {
+
+        }
+        cursor ++;
+        return temp;
     }
 
     public void remove() {

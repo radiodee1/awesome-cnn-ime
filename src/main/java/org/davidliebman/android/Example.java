@@ -47,13 +47,14 @@ public class Example {
 
         int nEpochs = 1;
 
+        int operation = Operation.EVAL_SINGLE_ALPHA_UPPER;
         Network cnn = new Network();
         //FileManager files = new FileManager();
 
-        DataSetSplit mnist = new DataSetSplit();
+        DataSetSplit data = new DataSetSplit(operation);
 
-        Operation opTest = new Operation(cnn,mnist,batchSize, nEpochs,iterations);
-        opTest.setEvalType(Operation.EVAL_SINGLE_ALPHA_UPPER);
+        Operation opTest = new Operation(cnn,data,batchSize, nEpochs,iterations);
+        opTest.setEvalType(operation);
         opTest.startOperation();
 
 

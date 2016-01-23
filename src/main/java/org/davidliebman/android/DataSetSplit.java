@@ -14,11 +14,20 @@ public class DataSetSplit {
     private int batchSize = 64;
     DataSetIterator setTrain, setTest;
 
-    public DataSetSplit() {
-        splitData();
+    public DataSetSplit( int type ) {
+        switch (type) {
+            case Operation.EVAL_TRAIN_NUMERIC:
+            case Operation.EVAL_TRAIN_NUMERIC_SHOW:
+                splitDataMnist();
+                break;
+            case Operation.EVAL_SINGLE_ALPHA_UPPER:
+                splitDataAlphaUpper();
+                break;
+        }
+        //splitDataMnist();
     }
 
-    public void splitData () {
+    public void splitDataMnist () {
         log.info("Load data....");
         try {
 
@@ -27,6 +36,19 @@ public class DataSetSplit {
 
             setTest = mnistTest;
             setTrain = mnistTrain;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void splitDataAlphaUpper() {
+        try {
+
+
+            AlphaDataSet alpha = new AlphaDataSet(Operation.EVAL_SINGLE_ALPHA_UPPER, 9999);
+            setTest = alpha;
         }
         catch (Exception e) {
             e.printStackTrace();
