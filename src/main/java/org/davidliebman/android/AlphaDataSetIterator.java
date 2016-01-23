@@ -28,7 +28,7 @@ public class AlphaDataSetIterator extends BaseDatasetIterator implements Iterato
 
     public AlphaDataSetIterator(int batch, int numExamples, BaseDataFetcher fetcher) throws Exception {
         super(batch, numExamples, fetcher);
-        OneHotOutput oneHot = new OneHotOutput(OneHotOutput.TYPE_ALPHA_UPPER);
+        OneHotOutput oneHot = new OneHotOutput(Operation.EVAL_SINGLE_ALPHA_UPPER);
         File alphaIO = new File("/home/dave/workspace/sd_19_temp.bmp");
         String letter = "S";
         /*

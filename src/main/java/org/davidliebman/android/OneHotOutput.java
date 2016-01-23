@@ -13,21 +13,27 @@ public class OneHotOutput {
     String stringList = "";
 
     int start = 0, stop = 0 ;
-    public static final int TYPE_NUMERALS = 0;
-    public static final int TYPE_ALPHA_UPPER = 1;
-    public static final int TYPE_ALPHA_LOWER = 2;
-    public static final int TYPE_SYMBOL = 4;
+    //public static final int TYPE_NUMERALS = 0;
+    //public static final int TYPE_ALPHA_UPPER = 1;
+    //public static final int TYPE_ALPHA_LOWER = 2;
+    //public static final int TYPE_SYMBOL = 4;
 
 
     public OneHotOutput(int type) {
         switch (type) {
-            case TYPE_NUMERALS:
+            case Operation.EVAL_SINGLE_NUMERIC:
+            case Operation.EVAL_TRAIN_NUMERIC:
+            case Operation.EVAL_TRAIN_NUMERIC_SHOW:
                 makeList( "0","9");
                 break;
-            case TYPE_ALPHA_LOWER:
+            case Operation.EVAL_SINGLE_ALPHA_LOWER:
+            case Operation.EVAL_TRAIN_ALPHA_LOWER:
+            //case TYPE_ALPHA_LOWER:
                 makeList("a","z");
                 break;
-            case TYPE_ALPHA_UPPER:
+            case Operation.EVAL_TRAIN_ALPHA_UPPER:
+            case Operation.EVAL_SINGLE_ALPHA_UPPER:
+            //case TYPE_ALPHA_UPPER:
                 makeList("A","Z");
                 break;
         }

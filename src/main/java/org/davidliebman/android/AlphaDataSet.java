@@ -31,41 +31,46 @@ public class AlphaDataSet  implements DataSetIterator {
     int cursor = 0;
     int cursorSize = 0;
 
+    float percentForTesting = 0.20f;
+
+    boolean trainWithThisSet = true;
+
     double [][] featureMatrix;
     double [][] labels;
 
-    public AlphaDataSet(int type, long mSeed)  throws Exception{
+    public AlphaDataSet(int type, boolean train, float split, long seed) throws Exception {
         super();
-
         searchType = type;
-        seed = mSeed;
-
-        OneHotOutput oneHot = new OneHotOutput(OneHotOutput.TYPE_ALPHA_UPPER);
-        File alphaIO = new File("/home/dave/workspace/sd_19_temp.bmp");
-        String letter = "S";
-        INDArray arr = loadImageBMP(alphaIO);
-        //ImageLoader loader = new ImageLoader(28,28);
-        //ImageVectorizer loaderV = new ImageVectorizer(alphaIO,oneHot.length(),oneHot.getMemberNumber(letter) );
-        //loaderV.normalize();
-        //loaderV.binarize(20);
-        //DataSet vector = loaderV.vectorize();
-
-
-        INDArray out = convert28x28(arr);
-        Operation.showSquare(out);
+        this.seed = seed;
+        trainWithThisSet = train;
+        percentForTesting = split;
 
         makeFileList();
 
         randomizeList() ;
+        splitList();
+    }
 
-        fillArrays();
+
+    public AlphaDataSet(int type, boolean train, long mSeed)  throws Exception{
+        super();
+        searchType = type;
+        seed = mSeed;
+        trainWithThisSet = train;
+
+        makeFileList();
+        randomizeList();
+        splitList();
+
+
+        //fillArrays();
     }
 
     public void makeFileList() throws Exception{
         String homeDir = System.getProperty("user.home") +
                 File.separator +"workspace" + File.separator + "sd_nineteen" + File.separator;
 
-        String pattern = "HSF*/F*/HSF*.bmp";
+        String pattern = "HSF*" + "/F*" + "/HSF*.bmp";
         pattern = homeDir + pattern;
         final PathMatcher matcher =
                 FileSystems.getDefault().getPathMatcher("glob:" + pattern);
@@ -166,16 +171,32 @@ public class AlphaDataSet  implements DataSetIterator {
         }
 
         list = newList;
-        cursorSize = (int)list.size()/64;
 
 
-        //output.getLabelOutput("c");
-        //System.out.println(String.valueOf((char)output.getMemberNumber("63")));
-        //System.out.println(list.get(list.size() - 1));
     }
 
 
-    public void fillArrays() throws Exception{
+
+    public void splitList() {
+        ArrayList<String>  newList = new ArrayList<String>();
+
+        if (trainWithThisSet) {
+            newList.addAll(list.subList(0,(int)(list.size() * (1.0 - percentForTesting))));
+        }
+        else {
+            newList.addAll(list.subList(1 + (int)(list.size() * (1.0 - percentForTesting)),list.size()));
+        }
+
+        list = newList;
+        cursorSize = (int)list.size()/64;
+
+    }
+
+    public void limitList(int num ) {
+        if (cursorSize > num) cursorSize = num;
+    }
+
+    public void fillArrays(int cursor) throws Exception{
         OneHotOutput output = new OneHotOutput(searchType);
 
         featureMatrix = new double[28*28][64];
@@ -270,10 +291,11 @@ public class AlphaDataSet  implements DataSetIterator {
         return null;
     }
 
+    public int length() { return list.size();}
 
     public boolean hasNext() {
         boolean hasnext = false;
-        if (cursor < cursorSize) hasnext = true;
+        if (cursor < cursorSize ) hasnext = true;
         return hasnext;
     }
 
@@ -282,7 +304,7 @@ public class AlphaDataSet  implements DataSetIterator {
 
         try {
             //create dataset with cursor here.
-            fillArrays();
+            fillArrays(cursor);
             temp.setFeatures(Nd4j.create(featureMatrix).transpose());
             temp.setLabels(Nd4j.create(labels).transpose());
         }

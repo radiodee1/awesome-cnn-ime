@@ -48,7 +48,9 @@ public class Example {
         int nEpochs = 1;
 
         int operation = Operation.EVAL_SINGLE_ALPHA_UPPER;
-        Network cnn = new Network();
+        OneHotOutput oneHot = new OneHotOutput(operation);
+
+        Network cnn = new Network(oneHot.length());
         //FileManager files = new FileManager();
 
         DataSetSplit data = new DataSetSplit(operation);

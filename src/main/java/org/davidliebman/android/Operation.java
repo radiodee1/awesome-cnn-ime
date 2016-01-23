@@ -104,7 +104,7 @@ public class Operation {
 
         FileManager files = new FileManager("lenet_example_digits");
 
-        OneHotOutput oneHot = new OneHotOutput(OneHotOutput.TYPE_NUMERALS);
+        OneHotOutput oneHot = new OneHotOutput(Operation.EVAL_TRAIN_NUMERIC_SHOW);
 
         System.out.println(oneHot.toString());
 
@@ -216,7 +216,7 @@ public class Operation {
         //AlphaDataSet alpha = new AlphaDataSet(OneHotOutput.TYPE_ALPHA_UPPER, 999);
 
         boolean saveValues = true; // false
-        boolean loadValues = false; // true
+        boolean loadValues = true; // true
         boolean trainValues = true; // false
         boolean evalValues = true;
 
@@ -227,12 +227,12 @@ public class Operation {
         log.info("Load data....");
         //DataSetSplit mnist = new DataSetSplit();
 
-        //train = data.getSetTrain();
+        train = data.getSetTrain();
         test = data.getSetTest();
 
         FileManager files = new FileManager("lenet_example_alpha");
 
-        OneHotOutput oneHot = new OneHotOutput(OneHotOutput.TYPE_ALPHA_UPPER);
+        OneHotOutput oneHot = new OneHotOutput(Operation.EVAL_SINGLE_ALPHA_UPPER);
 
         System.out.println(oneHot.toString());
 
@@ -244,13 +244,13 @@ public class Operation {
         model.setListeners(new ScoreIterationListener(1));
         for( int i=0; i<epochs; i++ ) {
 
-            //if (trainValues) model.fit(train);
+            if (trainValues) model.fit(train);
 
             log.info("*** Completed epoch {} ***", i);
             if (evalValues) {
                 log.info("Evaluate model....");
                 Evaluation eval = new Evaluation(network.getOutputNum());
-                while (test.hasNext() && nextNum == 0) {
+                while (test.hasNext() ) {
                     DataSet ds = test.next();
 
                     for(int jj = 0; jj < ds.getFeatureMatrix().length() / (28*28); jj ++) {
