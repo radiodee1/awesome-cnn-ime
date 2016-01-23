@@ -46,12 +46,13 @@ public class DataSetSplit {
     public void splitDataAlphaUpper() {
         try {
 
+            long seed = System.currentTimeMillis();
 
-            AlphaDataSet alphaTrain = new AlphaDataSet(Operation.EVAL_SINGLE_ALPHA_UPPER, true, 0.20f, 9999);
+            AlphaDataSet alphaTrain = new AlphaDataSet(Operation.EVAL_SINGLE_ALPHA_UPPER, true, 0.20f, seed);
             //alphaTrain.limitList(100);
             System.out.println(alphaTrain.length());
             setTrain = alphaTrain;
-            AlphaDataSet alphaTest = new AlphaDataSet(Operation.EVAL_SINGLE_ALPHA_UPPER, false,0.20f, 9999);
+            AlphaDataSet alphaTest = new AlphaDataSet(Operation.EVAL_SINGLE_ALPHA_UPPER, false,0.20f, seed);
             //alphaTest.limitList(20);
             System.out.println(alphaTest.length());
             setTest = alphaTest;
