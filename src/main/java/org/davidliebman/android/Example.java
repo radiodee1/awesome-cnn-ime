@@ -42,6 +42,8 @@ public class Example {
 
     public static void main(String[] args) throws Exception {
 
+
+
         int batchSize = 64;
         int iterations = 1; //10
 
@@ -55,8 +57,22 @@ public class Example {
 
         DataSetSplit data = new DataSetSplit(operation);
 
-        Operation opTest = new Operation(cnn,data,batchSize, nEpochs,iterations);
+        final Operation opTest = new Operation(cnn,data,batchSize, nEpochs,iterations);
         opTest.setEvalType(operation);
+
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            public void run() {
+                try {
+
+                    opTest.saveModel();
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
         opTest.startOperation();
 
 

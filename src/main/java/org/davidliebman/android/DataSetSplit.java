@@ -48,11 +48,11 @@ public class DataSetSplit {
 
 
             AlphaDataSet alphaTrain = new AlphaDataSet(Operation.EVAL_SINGLE_ALPHA_UPPER, true, 0.20f, 9999);
-            alphaTrain.limitList(100);
+            //alphaTrain.limitList(100);
             System.out.println(alphaTrain.length());
             setTrain = alphaTrain;
             AlphaDataSet alphaTest = new AlphaDataSet(Operation.EVAL_SINGLE_ALPHA_UPPER, false,0.20f, 9999);
-            alphaTest.limitList(20);
+            //alphaTest.limitList(20);
             System.out.println(alphaTest.length());
             setTest = alphaTest;
         }

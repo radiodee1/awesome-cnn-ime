@@ -25,6 +25,7 @@ public class Operation {
     MultiLayerNetwork model;
     DataSetSplit data;
     DataSetIterator train, test;
+    FileManager files ;
     int batchSize;
     int epochs;
     int iterations;
@@ -102,7 +103,7 @@ public class Operation {
         train = data.getSetTrain();
         test = data.getSetTest();
 
-        FileManager files = new FileManager("lenet_example_digits");
+        files = new FileManager("lenet_example_digits");
 
         OneHotOutput oneHot = new OneHotOutput(Operation.EVAL_TRAIN_NUMERIC_SHOW);
 
@@ -176,7 +177,7 @@ public class Operation {
         train = data.getSetTrain();
         test = data.getSetTest();
 
-        FileManager files = new FileManager("lenet_example_digits");
+        files = new FileManager("lenet_example_digits");
 
         if (loadValues) {
             files.loadModel(model);
@@ -225,12 +226,12 @@ public class Operation {
         int nextNum = 0;
 
         log.info("Load data....");
-        //DataSetSplit mnist = new DataSetSplit();
+
 
         train = data.getSetTrain();
         test = data.getSetTest();
 
-        FileManager files = new FileManager("lenet_example_alpha");
+        files = new FileManager("lenet_example_alpha_upper");
 
         OneHotOutput oneHot = new OneHotOutput(Operation.EVAL_SINGLE_ALPHA_UPPER);
 
@@ -289,6 +290,11 @@ public class Operation {
             files.saveModel(model);
             log.info("values saved....");
         }
+    }
+
+    public void saveModel() throws Exception {
+        files.saveModel(model);
+        System.out.println("save from outside Operation.java");
     }
 
 
