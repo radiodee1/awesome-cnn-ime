@@ -32,6 +32,9 @@ public class Operation {
 
     int evalType = 0;
 
+    int output_cursor = 0, output_num = 0;
+    float output_score = 0;
+
     public static final int EVAL_SINGLE_NUMERIC = 1;
     public static final int EVAL_SINGLE_ALPHA_UPPER = 2;
     public static final int EVAL_SINGLE_ALPHA_LOWER = 3;
@@ -127,7 +130,7 @@ public class Operation {
                     DataSet ds = test.next();
 
                     for(int jj = 0; jj < ds.getFeatureMatrix().length() / (28*28); jj ++) {
-                        System.out.println(" jj " + jj + " next " + nextNum + " percent " + (evalsCorrect/evalsTotal));
+                        System.out.println("iteration " + jj + " cursor " + nextNum + " percent " + (evalsCorrect/evalsTotal));
                         showSquare(ds.get(jj).getFeatureMatrix());
                         //int label = showNumForSquare(ds.get(jj).getLabels());
 
@@ -216,9 +219,9 @@ public class Operation {
 
         //AlphaDataSet alpha = new AlphaDataSet(OneHotOutput.TYPE_ALPHA_UPPER, 999);
 
-        boolean saveValues = true; // false
+        boolean saveValues = false; // false
         boolean loadValues = true; // true
-        boolean trainValues = true; // false
+        boolean trainValues = false; // false
         boolean evalValues = true;
 
         float evalsTotal = 0, evalsCorrect = 0;
@@ -255,7 +258,12 @@ public class Operation {
                     DataSet ds = test.next();
 
                     for(int jj = 0; jj < ds.getFeatureMatrix().length() / (28*28); jj ++) {
-                        System.out.println(" jj " + jj + " next " + nextNum + " percent " + (evalsCorrect/evalsTotal));
+                        System.out.println("iterations " + jj + " cursor " + nextNum + " percent " + (evalsCorrect/evalsTotal));
+
+                        output_cursor = nextNum;
+                        output_num = jj;
+                        output_score = (evalsCorrect/evalsTotal);
+
                         showSquare(ds.get(jj).getFeatureMatrix());
                         //int label = showNumForSquare(ds.get(jj).getLabels());
 
@@ -294,6 +302,7 @@ public class Operation {
 
     public void saveModel() throws Exception {
         files.saveModel(model);
+        System.out.println("c=" + output_cursor + " n=" + output_num + " score=" + output_score);
         System.out.println("save from outside Operation.java");
     }
 
