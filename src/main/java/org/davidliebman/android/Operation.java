@@ -130,7 +130,7 @@ public class Operation {
                         showSquare(ds.get(jj).getFeatureMatrix());
                         //int label = showNumForSquare(ds.get(jj).getLabels());
 
-                        String hotLabel = oneHot.getMatchingOut(ds.get(jj).getLabels());
+                        String hotLabel = oneHot.getMatchingOut(ds.get(jj).getLabels().linearView());
                         System.out.println("label "+ hotLabel);
 
                         INDArray output = model.output(ds.get(jj).getFeatureMatrix());
