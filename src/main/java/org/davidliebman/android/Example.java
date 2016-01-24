@@ -45,11 +45,14 @@ public class Example {
     public Example () {
         editor = new CharacterEditor();
         editor.main(null);
+        //editor.prep();
     }
 
     public static void main(String[] args) throws Exception {
 
         Example e = new Example();
+
+
 
         int batchSize = 64;
         int iterations = 1; //10

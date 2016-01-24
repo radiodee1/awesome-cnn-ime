@@ -48,7 +48,7 @@ public class Operation {
 
 
     private static final Logger log = LoggerFactory.getLogger(Operation.class);
-
+    public boolean saveOnExit = false;
 
     public Operation(Network model, DataSetSplit data, int batchSize, int epochs, int iterations) throws Exception{
         this.network = model;
@@ -223,7 +223,7 @@ public class Operation {
 
         //AlphaDataSet alpha = new AlphaDataSet(OneHotOutput.TYPE_ALPHA_UPPER, 999);
 
-        boolean saveValues = true; // false
+        boolean saveValues = false; // false
         boolean loadValues = true; // true
         boolean trainValues = true; // false
         boolean evalValues = true;
@@ -309,7 +309,7 @@ public class Operation {
 
         //AlphaDataSet alpha = new AlphaDataSet(OneHotOutput.TYPE_ALPHA_UPPER, 999);
 
-        boolean saveValues = true; // false
+        boolean saveValues = false; // false
         boolean loadValues = true; // true
         boolean trainValues = true; // false
         boolean evalValues = true;
@@ -391,9 +391,11 @@ public class Operation {
     }
 
     public void saveModel() throws Exception {
-        files.saveModel(model);
-        System.out.println("c=" + output_cursor + " n=" + output_num + " score=" + output_score);
-        System.out.println("save from outside Operation.java");
+        if(saveOnExit) {
+            files.saveModel(model);
+            System.out.println("c=" + output_cursor + " n=" + output_num + " score=" + output_score);
+            System.out.println("save from outside Operation.java");
+        }
     }
 
 
