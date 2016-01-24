@@ -11,15 +11,15 @@
     </properties>
     <border type="none"/>
     <children>
-      <component id="6ff8b" class="javax.swing.JButton" binding="EXITButton" default-binding="true">
+      <component id="6ff8b" class="javax.swing.JButton" binding="EXITButton" custom-create="true" default-binding="true">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="EXIT"/>
+          <text value="CLEAR"/>
         </properties>
       </component>
-      <component id="a6318" class="javax.swing.JButton" binding="ENTERButton" default-binding="true">
+      <component id="a6318" class="javax.swing.JButton" binding="ENTERButton" custom-create="true" default-binding="true">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -27,7 +27,7 @@
           <text value="ENTER"/>
         </properties>
       </component>
-      <component id="51016" class="javax.swing.JButton" binding="TOGGLEButton" default-binding="true">
+      <component id="51016" class="javax.swing.JButton" binding="TOGGLEButton" custom-create="true" default-binding="true">
         <constraints>
           <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -35,7 +35,7 @@
           <text value="TOGGLE"/>
         </properties>
       </component>
-      <component id="65e11" class="javax.swing.JButton" binding="WRITEERASEButton" default-binding="true">
+      <component id="65e11" class="javax.swing.JButton" binding="WRITEERASEButton" custom-create="true" default-binding="true">
         <constraints>
           <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
