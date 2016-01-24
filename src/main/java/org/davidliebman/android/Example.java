@@ -40,9 +40,16 @@ public class Example {
 
     private static final Logger log = LoggerFactory.getLogger(Example.class);
 
+    CharacterEditor editor ;
+
+    public Example () {
+        editor = new CharacterEditor();
+        editor.main(null);
+    }
+
     public static void main(String[] args) throws Exception {
 
-
+        Example e = new Example();
 
         int batchSize = 64;
         int iterations = 1; //10
