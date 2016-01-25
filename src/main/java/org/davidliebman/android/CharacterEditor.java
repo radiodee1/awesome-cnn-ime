@@ -1,7 +1,5 @@
 package org.davidliebman.android;
 
-import com.sun.prism.*;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.Graphics;
@@ -23,19 +21,29 @@ public class CharacterEditor {
     private JPanel outerPanel;
 
     double[][] screen = new double[28][28];
+    int type = Operation.EVAL_SINGLE_ALPHA_LOWER;
     boolean write = true;
+    public boolean hasInput = false;
+    String output = "";
+
+    Operation [] operations;
+
+
     int marginTop = 5, marginBottom = 5, marginLeft = 5, marginRight = 5;
 
     public CharacterEditor() {
-        /*
+
         JFrame frame = new JFrame("CharacterEditor");
-        frame.setContentPane(new CharacterEditor().outerPanel);
+        frame.setContentPane(outerPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-        */
+
     }
 
+    public void addOperations ( Operation op1, Operation op2, Operation op3) {
+        operations = new Operation[] {op1,op2,op3};
+    }
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("CharacterEditor");
@@ -47,6 +55,73 @@ public class CharacterEditor {
     }
 
     public void prep() {
+
+        ENTERButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //
+                hasInput = true;
+                System.out.println("hasInput " + operations.length);
+
+                if (operations.length == 3) {
+                    try {
+                        switch (type) {
+                            case Operation.EVAL_SINGLE_ALPHA_LOWER:
+                                operations[0].startOperation(getScreen());
+                                setOutput(operations[0].getOutput());
+                                break;
+                            case Operation.EVAL_SINGLE_ALPHA_UPPER:
+                                operations[1].startOperation(getScreen());
+                                setOutput(operations[1].getOutput());
+                                break;
+                            case Operation.EVAL_SINGLE_NUMERIC:
+                                operations[2].startOperation(getScreen());
+                                setOutput(operations[2].getOutput());
+                                break;
+                        }
+                    } catch (Exception p) {
+                        p.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        //CLEAR
+        EXITButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                for (int i = 0; i < 28; i ++ ) {
+                    for (int j = 0; j < 28; j ++ ) {
+                        screen[i][j] = 0.0d;
+                    }
+                }
+                hasInput = false;
+                inputPanel.revalidate();
+                inputPanel.repaint();
+            }
+
+        });
+
+        TOGGLEButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                switch (type) {
+                    case Operation.EVAL_SINGLE_ALPHA_LOWER:
+                        TOGGLEButton.setText("UPPER");
+                        type = Operation.EVAL_SINGLE_ALPHA_UPPER;
+                        break;
+                    case Operation.EVAL_SINGLE_ALPHA_UPPER:
+                        TOGGLEButton.setText("#NUM#");
+                        type = Operation.EVAL_SINGLE_NUMERIC;
+                        break;
+                    case Operation.EVAL_SINGLE_NUMERIC:
+                        TOGGLEButton.setText("lower");
+                        type = Operation.EVAL_SINGLE_ALPHA_LOWER;
+                        break;
+                    default:
+                        TOGGLEButton.setText("lower");
+                        type = Operation.EVAL_SINGLE_ALPHA_LOWER;
+                        break;
+                }
+            }
+        });
 
         WRITEERASEButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -62,7 +137,7 @@ public class CharacterEditor {
                         //System.out.println("write");
                     }
                 }
-                OUTLabel.setText("data " + e.getSource().toString());
+                //OUTLabel.setText("data " + e.getSource().toString());
             }
         });
 
@@ -79,7 +154,7 @@ public class CharacterEditor {
                 int posx = (int) (xx / (float) sizex * 28);
                 int posy = (int) (yy / (float) sizey * 28);
 
-                OUTLabel.setText(posx + "/" + posy);
+                //OUTLabel.setText(posx + "/" + posy);
 
                 if (posx >= 0 && posx < 28 && posy >= 0 && posy < 28) {
                     if (write) {
@@ -90,6 +165,7 @@ public class CharacterEditor {
                 }
 
                 //((ScreenPanel)inputPanel).setScreen(screen);
+                //hasInput = false;
                 inputPanel.revalidate();
                 inputPanel.repaint();
                 //drawInputPanel();
@@ -115,8 +191,26 @@ public class CharacterEditor {
         });
     }
 
-    public void bindWriteEraseButton() {
+    public int getType() {
+        int out = type;
+        if (!hasInput) out = -1;
+        return out;
+    }
 
+    public double [][] getScreen () {
+        return screen;
+    }
+
+    public void setOutput(String in) {
+        hasInput = false;
+
+        output = in;
+        OUTLabel.setText(output);
+
+    }
+
+    public boolean getHasInput() {
+        return hasInput;
     }
 
     private void createUIComponents() {
@@ -126,7 +220,7 @@ public class CharacterEditor {
         ENTERButton = new JButton();
         TOGGLEButton = new JButton();
         WRITEERASEButton = new JButton();
-        inputPanel = new ScreenPanel(screen);
+        inputPanel = new ScreenPanel();
         OUTLabel = new JLabel();
         outerPanel = new JPanel();
 
@@ -138,11 +232,10 @@ public class CharacterEditor {
 
     class ScreenPanel extends JPanel {
 
-        //double[][] screen;
 
         Graphics gg;
 
-        public ScreenPanel(double[][] in) {
+        public ScreenPanel() {
             super();
             //screen = in;
         }
@@ -156,9 +249,6 @@ public class CharacterEditor {
 
         }
 
-        //public void setScreen(double in[][]) {
-        //    screen = in;
-        //}
 
 
         public void drawInputPanel(Graphics g) {

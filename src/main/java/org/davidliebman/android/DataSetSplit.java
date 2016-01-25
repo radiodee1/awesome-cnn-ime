@@ -20,13 +20,17 @@ public class DataSetSplit {
             case Operation.EVAL_TRAIN_NUMERIC_SHOW:
                 splitDataMnist();
                 break;
-            case Operation.EVAL_SINGLE_ALPHA_UPPER:
             case Operation.EVAL_TRAIN_ALPHA_UPPER:
                 splitDataAlphaUpper();
                 break;
-            case Operation.EVAL_SINGLE_ALPHA_LOWER:
             case Operation.EVAL_TRAIN_ALPHA_LOWER:
                 splitDataAlphaLower();
+                break;
+            case Operation.EVAL_SINGLE_ALPHA_LOWER:
+            case Operation.EVAL_SINGLE_ALPHA_UPPER:
+            case Operation.EVAL_SINGLE_NUMERIC:
+                setTest = null;
+                setTrain = null;
                 break;
         }
         //splitDataMnist();

@@ -27,6 +27,9 @@ public class Operation {
     DataSetIterator train, test;
     FileManager files ;
 
+    INDArray singleInput;
+    String singleOutput;
+
     CharacterEditor editor;
 
     int batchSize;
@@ -67,12 +70,22 @@ public class Operation {
 
     }
 
+    public String getOutput() {
+        return singleOutput;
+    }
+
     public void setEvalType(int type) {evalType = type;}
+
+    public void startOperation(double in [][]) throws Exception {
+        singleInput = Nd4j.create(in).linearViewColumnOrder();
+        startOperation();
+    }
 
     public void startOperation() throws Exception {
 
         switch (evalType) {
             case EVAL_SINGLE_ALPHA_UPPER:
+                startOperationSingleAlphaUpper();
                 break;
             case EVAL_SINGLE_ALPHA_LOWER:
                 break;
@@ -90,6 +103,62 @@ public class Operation {
             case EVAL_TRAIN_NUMERIC_SHOW:
                 startOperationMnistShow();
                 break;
+        }
+
+    }
+
+    public void startOperationSingleAlphaUpper() throws Exception {
+        boolean saveValues = false; // false
+        boolean loadValues = true; // true
+        boolean trainValues = false; // false
+        boolean evalValues = false;
+
+        float evalsTotal = 0, evalsCorrect = 0;
+
+        int nextNum = 0;
+
+        log.info("Load data....");
+
+
+        //train = data.getSetTrain();
+        //test = data.getSetTest();
+
+        files = new FileManager("lenet_example_alpha_upper");
+
+        OneHotOutput oneHot = new OneHotOutput(Operation.EVAL_SINGLE_ALPHA_UPPER);
+
+        System.out.println(oneHot.toString());
+
+        if (loadValues) {
+            files.loadModel(model);
+        }
+
+        log.info("Train model....");
+
+        //model.setListeners(new ScoreIterationListener(1));
+
+        for( int i=0; i<epochs; i++ ) {
+
+            //if (trainValues) model.fit(train);
+
+            log.info("*** Completed epoch {} ***", i);
+            if (true) {
+                log.info("Evaluate model....");
+                //Evaluation eval = new Evaluation(network.getOutputNum());
+                //while (test.hasNext() ) {
+                //INDArray ds = this.singleInput;//test.next();
+
+
+                showSquare(singleInput);
+
+                INDArray output = model.output(singleInput.transpose());
+
+                String hotOut = oneHot.getMatchingOut(output);
+                System.out.println("output " + hotOut);
+
+                singleOutput = hotOut;
+
+            }
         }
 
     }

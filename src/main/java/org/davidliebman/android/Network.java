@@ -40,7 +40,7 @@ public class Network {
 
     public void buildNetwork() {
 
-        log.info("Build model....");
+        log.info("Build model.... " + outputNum);
         MultiLayerConfiguration.Builder builder = new NeuralNetConfiguration.Builder()
                 .seed(seed)
                 .iterations(iterations)

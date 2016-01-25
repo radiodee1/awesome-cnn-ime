@@ -41,50 +41,98 @@ public class Example {
     private static final Logger log = LoggerFactory.getLogger(Example.class);
 
     CharacterEditor editor ;
+    static boolean useGui = true;
+    int batchSize = 64;
+    int iterations = 1; //10
+    int nEpochs = 1;
 
-    public Example () {
+    public Example () throws Exception {
         editor = new CharacterEditor();
-        editor.main(null);
-        //editor.prep();
+
+        int operation1 = Operation.EVAL_SINGLE_ALPHA_LOWER;
+        OneHotOutput oneHot1 = new OneHotOutput(operation1);
+        Network cnn1 = new Network(oneHot1.length());
+        DataSetSplit data1 = new DataSetSplit(operation1);
+        Operation opTest1 = new Operation(cnn1, data1, batchSize, nEpochs, iterations);
+        opTest1.setEvalType(operation1);
+
+        int operation2 = Operation.EVAL_SINGLE_ALPHA_UPPER;
+        OneHotOutput oneHot2 = new OneHotOutput(operation2);
+        Network cnn2 = new Network(oneHot2.length());
+        DataSetSplit data2 = new DataSetSplit(operation2);
+        Operation opTest2 = new Operation(cnn2, data2, batchSize, nEpochs, iterations);
+        opTest2.setEvalType(operation2);
+
+        int operation3 = Operation.EVAL_SINGLE_NUMERIC;
+        OneHotOutput oneHot3 = new OneHotOutput(operation3);
+        Network cnn3 = new Network(oneHot3.length());
+        DataSetSplit data3 = new DataSetSplit(operation3);
+        Operation opTest3 = new Operation(cnn3, data3, batchSize, nEpochs, iterations);
+        opTest3.setEvalType(operation3);
+
+        editor.addOperations(opTest1,opTest2,opTest3);
+
+        /*
+        while (false) {
+            if (editor.getHasInput() ) {
+                int type = editor.getType();
+                System.out.println(editor.getHasInput() + " "+ type);
+
+                switch (type) {
+                    case Operation.EVAL_SINGLE_ALPHA_LOWER:
+                        opTest1.startOperation(editor.getScreen());
+                        editor.setOutput(opTest1.getOutput());
+                        break;
+                    case Operation.EVAL_SINGLE_ALPHA_UPPER:
+                        opTest2.startOperation(editor.getScreen());
+                        editor.setOutput(opTest2.getOutput());
+                        break;
+                    case Operation.EVAL_SINGLE_NUMERIC:
+                        opTest3.startOperation(editor.getScreen());
+                        editor.setOutput(opTest3.getOutput());
+                        break;
+                }
+            }
+        }
+        */
+        /////////////////////
     }
 
     public static void main(String[] args) throws Exception {
 
-        Example e = new Example();
+        if (useGui) {
+            Example e = new Example();
+        }
+        else {
 
+            int batchSize = 64;
+            int iterations = 1; //10
+            int nEpochs = 1;
+            int operation = Operation.EVAL_TRAIN_ALPHA_LOWER;
 
+            OneHotOutput oneHot = new OneHotOutput(operation);
 
-        int batchSize = 64;
-        int iterations = 1; //10
+            Network cnn = new Network(oneHot.length());
 
-        int nEpochs = 1;
+            DataSetSplit data = new DataSetSplit(operation);
 
-        int operation = Operation.EVAL_TRAIN_ALPHA_LOWER;
-        OneHotOutput oneHot = new OneHotOutput(operation);
+            final Operation opTest = new Operation(cnn, data, batchSize, nEpochs, iterations);
+            opTest.setEvalType(operation);
 
-        Network cnn = new Network(oneHot.length());
-        //FileManager files = new FileManager();
+            Runtime.getRuntime().addShutdownHook(new Thread() {
+                public void run() {
+                    try {
 
-        DataSetSplit data = new DataSetSplit(operation);
-
-        final Operation opTest = new Operation(cnn,data,batchSize, nEpochs,iterations);
-        opTest.setEvalType(operation);
-
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-            public void run() {
-                try {
-
-                    opTest.saveModel();
+                        opTest.saveModel();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+            });
 
 
-        opTest.startOperation();
-
+            opTest.startOperation();
+        }
 
     }
 }
