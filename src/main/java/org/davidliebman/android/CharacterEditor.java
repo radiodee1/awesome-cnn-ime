@@ -158,9 +158,9 @@ public class CharacterEditor {
 
                 if (posx >= 0 && posx < 28 && posy >= 0 && posy < 28) {
                     if (write) {
-                        screen[posx][posy] = 1.0d;
+                        screen[posy][posx] = 1.0d;
                     } else {
-                        screen[posx][posy] = 0.0d;
+                        screen[posy][posx] = 0.0d;
                     }
                 }
 
@@ -224,8 +224,6 @@ public class CharacterEditor {
         OUTLabel = new JLabel();
         outerPanel = new JPanel();
 
-        //WRITEERASEButton.setText("WRITE");
-
         prep();
     }
 
@@ -260,7 +258,7 @@ public class CharacterEditor {
 
             for (int i = 0; i < 28; i++) {
                 for (int j = 0; j < 28; j++) {
-                    if (screen[i][j] > 0.5d) {
+                    if (screen[j][i] > 0.5d) {
                         int xpos = (int) (i * xx) + marginLeft;
                         int ypos = (int) (j * yy) + marginTop;
                         g.setColor(Color.BLUE);
