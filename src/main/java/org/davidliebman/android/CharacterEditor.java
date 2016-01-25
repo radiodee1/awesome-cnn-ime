@@ -155,12 +155,16 @@ public class CharacterEditor {
 
                 //OUTLabel.setText(posx + "/" + posy);
 
+                brushScreen(posx,posy);
+
                 if (posx >= 0 && posx < 28 && posy >= 0 && posy < 28) {
+                    /*
                     if (write) {
                         screen[posy][posx] = 1.0d;
                     } else {
                         screen[posy][posx] = 0.0d;
                     }
+                    */
                 }
 
                 //((ScreenPanel)inputPanel).setScreen(screen);
@@ -190,11 +194,28 @@ public class CharacterEditor {
         });
     }
 
+    public  void brushScreen(int x, int y) {
+        for (int i = y - 1; i <= y + 1; i ++) {
+            for (int j = x - 1; j <= x + 1; j ++) {
+                if (i >= 0 && i < 28 && j >= 0 && j < 28) {
+                    if (write) {
+                        screen[i][j] = 1.0d;
+                    }
+                    else {
+                        screen[i][j] = 0.0d;
+                    }
+                }
+            }
+        }
+    }
+
+    /*
     public int getType() {
         int out = type;
         if (!hasInput) out = -1;
         return out;
     }
+    */
 
     public double [][] getScreen () {
         return screen;

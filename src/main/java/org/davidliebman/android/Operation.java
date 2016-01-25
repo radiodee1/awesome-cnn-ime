@@ -51,7 +51,7 @@ public class Operation {
 
 
     private static final Logger log = LoggerFactory.getLogger(Operation.class);
-    public boolean saveOnExit = false;
+    public boolean saveOnExit = true;
 
     public Operation(Network model, DataSetSplit data, int batchSize, int epochs, int iterations) throws Exception{
         this.network = model;
@@ -133,9 +133,9 @@ public class Operation {
     }
 
     public void startOperationMnistShow() throws Exception {
-        boolean saveValues = false;
+        boolean saveValues = true;
         boolean loadValues = true;
-        boolean trainValues = false;
+        boolean trainValues = true;
         boolean evalValues = true;
 
         float evalsTotal = 0, evalsCorrect = 0;

@@ -18,7 +18,8 @@ public class DataSetSplit {
         switch (type) {
             case Operation.EVAL_TRAIN_NUMERIC:
             case Operation.EVAL_TRAIN_NUMERIC_SHOW:
-                splitDataMnist();
+                //splitDataMnist();
+                splitDataAlphaDigit();
                 break;
             case Operation.EVAL_TRAIN_ALPHA_UPPER:
                 splitDataAlphaUpper();
@@ -82,6 +83,26 @@ public class DataSetSplit {
             System.out.println(alphaTrain.length());
             setTrain = alphaTrain;
             AlphaDataSet alphaTest = new AlphaDataSet(Operation.EVAL_TRAIN_ALPHA_LOWER, false,0.20f, seed);
+            alphaTest.limitList(20);
+            System.out.println(alphaTest.length());
+            setTest = alphaTest;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void splitDataAlphaDigit() {
+        try {
+
+            long seed = System.currentTimeMillis();
+
+            AlphaDataSet alphaTrain = new AlphaDataSet(Operation.EVAL_TRAIN_NUMERIC, true, 0.20f, seed);
+            alphaTrain.limitList(100);
+            System.out.println(alphaTrain.length());
+            setTrain = alphaTrain;
+            AlphaDataSet alphaTest = new AlphaDataSet(Operation.EVAL_TRAIN_NUMERIC, false,0.20f, seed);
             alphaTest.limitList(20);
             System.out.println(alphaTest.length());
             setTest = alphaTest;
