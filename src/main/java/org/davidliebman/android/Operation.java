@@ -70,6 +70,11 @@ public class Operation {
 
     }
 
+    public void setFileManager(FileManager fileManager) throws Exception{
+        files = fileManager;
+        files.loadModel(model);
+    }
+
     public String getOutput() {
         return singleOutput;
     }
@@ -85,11 +90,13 @@ public class Operation {
 
         switch (evalType) {
             case EVAL_SINGLE_ALPHA_UPPER:
-                startOperationSingleAlphaUpper();
+                startOperationSingle();
                 break;
             case EVAL_SINGLE_ALPHA_LOWER:
+                startOperationSingle();
                 break;
             case EVAL_SINGLE_NUMERIC:
+                startOperationSingle();
                 break;
             case EVAL_TRAIN_ALPHA_UPPER:
                 startOperationAlphaUpperShow();
@@ -107,59 +114,21 @@ public class Operation {
 
     }
 
-    public void startOperationSingleAlphaUpper() throws Exception {
-        boolean saveValues = false; // false
-        boolean loadValues = true; // true
-        boolean trainValues = false; // false
-        boolean evalValues = false;
-
-        float evalsTotal = 0, evalsCorrect = 0;
-
-        int nextNum = 0;
-
-        log.info("Load data....");
+    public void startOperationSingle() throws Exception {
 
 
-        //train = data.getSetTrain();
-        //test = data.getSetTest();
-
-        files = new FileManager("lenet_example_alpha_upper");
-
-        OneHotOutput oneHot = new OneHotOutput(Operation.EVAL_SINGLE_ALPHA_UPPER);
+        OneHotOutput oneHot = new OneHotOutput(evalType);
 
         System.out.println(oneHot.toString());
 
-        if (loadValues) {
-            files.loadModel(model);
-        }
+        showSquare(singleInput);
 
-        log.info("Train model....");
+        INDArray output = model.output(singleInput.transpose());
 
-        //model.setListeners(new ScoreIterationListener(1));
+        String hotOut = oneHot.getMatchingOut(output);
+        System.out.println("output " + hotOut);
 
-        for( int i=0; i<epochs; i++ ) {
-
-            //if (trainValues) model.fit(train);
-
-            log.info("*** Completed epoch {} ***", i);
-            if (true) {
-                log.info("Evaluate model....");
-                //Evaluation eval = new Evaluation(network.getOutputNum());
-                //while (test.hasNext() ) {
-                //INDArray ds = this.singleInput;//test.next();
-
-
-                showSquare(singleInput);
-
-                INDArray output = model.output(singleInput.transpose());
-
-                String hotOut = oneHot.getMatchingOut(output);
-                System.out.println("output " + hotOut);
-
-                singleOutput = hotOut;
-
-            }
-        }
+        singleOutput = hotOut;
 
     }
 
@@ -179,7 +148,7 @@ public class Operation {
         train = data.getSetTrain();
         test = data.getSetTest();
 
-        files = new FileManager("lenet_example_digits");
+        if (files == null) files = new FileManager("lenet_example_digits");
 
         OneHotOutput oneHot = new OneHotOutput(Operation.EVAL_TRAIN_NUMERIC_SHOW);
 
@@ -253,7 +222,7 @@ public class Operation {
         train = data.getSetTrain();
         test = data.getSetTest();
 
-        files = new FileManager("lenet_example_digits");
+        if (files == null) files = new FileManager("lenet_example_digits");
 
         if (loadValues) {
             files.loadModel(model);
@@ -307,7 +276,7 @@ public class Operation {
         train = data.getSetTrain();
         test = data.getSetTest();
 
-        files = new FileManager("lenet_example_alpha_upper");
+        if (files == null ) files = new FileManager("lenet_example_alpha_upper");
 
         OneHotOutput oneHot = new OneHotOutput(Operation.EVAL_SINGLE_ALPHA_UPPER);
 
@@ -393,7 +362,7 @@ public class Operation {
         train = data.getSetTrain();
         test = data.getSetTest();
 
-        files = new FileManager("lenet_example_alpha_lower");
+        if (files == null) files = new FileManager("lenet_example_alpha_lower");
 
         OneHotOutput oneHot = new OneHotOutput(Operation.EVAL_SINGLE_ALPHA_LOWER);
 

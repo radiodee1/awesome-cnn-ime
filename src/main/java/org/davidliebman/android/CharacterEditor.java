@@ -60,7 +60,6 @@ public class CharacterEditor {
             public void actionPerformed(ActionEvent e) {
                 //
                 hasInput = true;
-                System.out.println("hasInput " + operations.length);
 
                 if (operations.length == 3) {
                     try {

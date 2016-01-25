@@ -47,6 +47,11 @@ public class Example {
     int nEpochs = 1;
 
     public Example () throws Exception {
+
+        batchSize = 1;
+        nEpochs = 1;
+        iterations = 1;
+
         editor = new CharacterEditor();
 
         int operation1 = Operation.EVAL_SINGLE_ALPHA_LOWER;
@@ -54,6 +59,7 @@ public class Example {
         Network cnn1 = new Network(oneHot1.length());
         DataSetSplit data1 = new DataSetSplit(operation1);
         Operation opTest1 = new Operation(cnn1, data1, batchSize, nEpochs, iterations);
+        opTest1.setFileManager( new FileManager("lenet_example_alpha_lower"));
         opTest1.setEvalType(operation1);
 
         int operation2 = Operation.EVAL_SINGLE_ALPHA_UPPER;
@@ -61,6 +67,7 @@ public class Example {
         Network cnn2 = new Network(oneHot2.length());
         DataSetSplit data2 = new DataSetSplit(operation2);
         Operation opTest2 = new Operation(cnn2, data2, batchSize, nEpochs, iterations);
+        opTest2.setFileManager( new FileManager("lenet_example_alpha_upper"));
         opTest2.setEvalType(operation2);
 
         int operation3 = Operation.EVAL_SINGLE_NUMERIC;
@@ -68,34 +75,12 @@ public class Example {
         Network cnn3 = new Network(oneHot3.length());
         DataSetSplit data3 = new DataSetSplit(operation3);
         Operation opTest3 = new Operation(cnn3, data3, batchSize, nEpochs, iterations);
+        opTest3.setFileManager( new FileManager("lenet_example_digits"));
         opTest3.setEvalType(operation3);
 
         editor.addOperations(opTest1,opTest2,opTest3);
 
-        /*
-        while (false) {
-            if (editor.getHasInput() ) {
-                int type = editor.getType();
-                System.out.println(editor.getHasInput() + " "+ type);
 
-                switch (type) {
-                    case Operation.EVAL_SINGLE_ALPHA_LOWER:
-                        opTest1.startOperation(editor.getScreen());
-                        editor.setOutput(opTest1.getOutput());
-                        break;
-                    case Operation.EVAL_SINGLE_ALPHA_UPPER:
-                        opTest2.startOperation(editor.getScreen());
-                        editor.setOutput(opTest2.getOutput());
-                        break;
-                    case Operation.EVAL_SINGLE_NUMERIC:
-                        opTest3.startOperation(editor.getScreen());
-                        editor.setOutput(opTest3.getOutput());
-                        break;
-                }
-            }
-        }
-        */
-        /////////////////////
     }
 
     public static void main(String[] args) throws Exception {
@@ -108,7 +93,7 @@ public class Example {
             int batchSize = 64;
             int iterations = 1; //10
             int nEpochs = 1;
-            int operation = Operation.EVAL_TRAIN_ALPHA_LOWER;
+            int operation = Operation.EVAL_TRAIN_NUMERIC_SHOW;
 
             OneHotOutput oneHot = new OneHotOutput(operation);
 
