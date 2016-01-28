@@ -4,9 +4,6 @@
     <list default="true" id="5a857b92-d38f-49c2-a6b0-632537c89443" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/org/davidliebman/android/Example.class" afterPath="$PROJECT_DIR$/target/classes/org/davidliebman/android/Example.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/davidliebman/android/CharacterEditor.java" afterPath="$PROJECT_DIR$/src/main/java/org/davidliebman/android/CharacterEditor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/davidliebman/android/DataSetSplit.java" afterPath="$PROJECT_DIR$/src/main/java/org/davidliebman/android/DataSetSplit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/davidliebman/android/Operation.java" afterPath="$PROJECT_DIR$/src/main/java/org/davidliebman/android/Operation.java" />
     </list>
     <ignored path="awesome-cnn-ime.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -42,7 +39,7 @@
       <file leaf-file-name="Example.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/davidliebman/android/Example.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.168">
+            <state vertical-scroll-proportion="0.384">
               <caret line="43" column="32" selection-start-line="43" selection-start-column="32" selection-end-line="43" selection-end-column="32" />
               <folding>
                 <element signature="e#4172#4436#0" expanded="true" />
@@ -717,7 +714,13 @@
       <option name="project" value="LOCAL" />
       <updated>1453747979409</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="retrain with no mnist because the results come out wrong when using the gui">
+      <created>1453754337588</created>
+      <option name="number" value="00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1453754337588</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -731,7 +734,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38357705" sideWeight="0.122857146" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2632171" sideWeight="0.87714285" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2632171" sideWeight="0.87714285" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295838" sideWeight="0.49714285" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18229167" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -800,7 +803,8 @@
     <MESSAGE value="add character editor" />
     <MESSAGE value="add character editor -- some slow progress" />
     <MESSAGE value="add character editor -- seems to work" />
-    <option name="LAST_COMMIT_MESSAGE" value="add character editor -- seems to work" />
+    <MESSAGE value="retrain with no mnist because the results come out wrong when using the gui" />
+    <option name="LAST_COMMIT_MESSAGE" value="retrain with no mnist because the results come out wrong when using the gui" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1239,7 +1243,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/davidliebman/android/Example.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.168">
+        <state vertical-scroll-proportion="0.384">
           <caret line="43" column="32" selection-start-line="43" selection-start-column="32" selection-end-line="43" selection-end-column="32" />
           <folding>
             <element signature="e#4172#4436#0" expanded="true" />
